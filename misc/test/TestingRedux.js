@@ -5,7 +5,7 @@ import {
   decrementBy5,
   increment,
   incrementBy5,
-} from "../features/counterSlice";
+} from "../../src/features/counterSlice";
 import TestingForm from "./TestingForm";
 
 function TestingRedux() {

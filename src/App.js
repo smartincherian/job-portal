@@ -4,7 +4,6 @@ import { NavBar } from "./components/NavBar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "./pages/Signup";
 import Listings from "./pages/Listings";
-import TestingRedux from "./app/TestingRedux";
 import ListingSelected from "./pages/ListingSelected";
 
 function App() {
@@ -16,7 +15,6 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/listings" element={<Listings />} />
         <Route path="/listings/:jobId" element={<ListingSelected />} />
-        <Route path="/test" element={<TestingRedux />} />
       </Routes>
     </div>
   );

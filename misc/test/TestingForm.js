@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { submit } from "../features/formSlice";
+import { submit } from "../../src/features/formSlice";
 
 function TestingForm() {
   const [name, setName] = useState("");
