@@ -1,0 +1,72 @@
+.no-border {
+  border: none;
+}
+
+.homepage-first-container {
+  margin-top: 0.5rem !important;
+}
+
+.second-container-title {
+  color: #4d3951;
+}
+
+.second-container-span {
+  color: #2bb792;
+}
+
+.jobseeker-login-font {
+  color: #31445a;
+  font-weight: bold !important;
+  line-height: 32px !important;
+  margin-bottom: 10px !important;
+  font-family: "Fira Sans", sans-serif !important;
+  font-size: 20px;
+}
+
+.third-container-sentence {
+  font-weight: bold;
+  margin-top: 4rem;
+  color: #4d3956;
+}
+
+.company-logos {
+  width: 100px;
+  height: 75px;
+}
+
+.users-jobs-logos {
+  width: 150px;
+  height: 75px;
+  border: 1px solid #555;
+}
+
+.homepage-grid-border {
+  border-left: 2px solid black;
+}
+
+.homepage-login-box {
+  border: 2px solid black;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 3px 4px;
+}
+
+.homepage-fourth-container {
+  margin-top: 0.5rem !important;
+}
+
+.users-jobs-font {
+  display: inline;
+  margin-left: 5px;
+  margin-bottom: 100px;
+  margin-top: 10px;
+  color: #31445a;
+}
+
+.users-jobs-span {
+  color: #2bb792;
+}
+
+.links {
+  text-decoration: none;
+}

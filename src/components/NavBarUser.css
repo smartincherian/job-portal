@@ -1,0 +1,27 @@
+.navbaruser-div {
+  font-family: "Fira Sans", sans-serif !important;
+  font-style: italic;
+}
+
+.helpMe {
+  display: none;
+}
+
+.user-details {
+  padding: 0.25rem 1rem;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 23px;
+  color: #251b37;
+}
+
+.logout-button {
+  color: #e14d2a;
+  display: inline;
+}
+
+.logout {
+  float: right;
+  cursor: pointer;
+  padding-bottom: 5px;
+}

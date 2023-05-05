@@ -1,0 +1,16 @@
+.listing-container {
+}
+
+.listing-grid-item:hover {
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+}
+
+.listing-grid-item {
+  margin-top: 2rem !important;
+  border: 1px solid #ccc;
+  background: #fff;
+  transition: box-shadow 0.3s;
+  border-radius: 5px;
+  text-align: left;
+  padding: 1rem;
+}
