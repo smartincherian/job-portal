@@ -14,3 +14,43 @@
   text-align: left;
   padding: 1rem;
 }
+
+.listing-selected-field {
+  font-weight: 100;
+  font-size: medium;
+}
+
+.listing-selected-list {
+  margin-left: 3rem;
+}
+
+.listing-selected-error {
+  color: #b04759;
+  margin: 0;
+  font-size: small;
+}
+
+.listing-selected-button {
+  line-height: 0 !important;
+  texttransform: "none" !important;
+  margin-top: 1rem !important;
+  width: 40vh;
+}
+
+.listing-selected-button-div {
+  margin-left: 50vh !important;
+}
+
+.listing-selected-submit-button {
+  margin-top: 3rem !important;
+  margin-bottom: 1rem !important;
+  margin-left: 0.5rem !important;
+}
+
+.listing-selected-container-second {
+  margin-bottom: 3rem;
+}
+
+.listing-field-names {
+  font-weight: bold !important;
+}
