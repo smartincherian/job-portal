@@ -68,3 +68,8 @@ body {
 .listings-grid-buttonbase {
   text-align: justify;
 }
+
+.listings-div {
+  background-color: #6c9bcf;
+  min-height: 100vh;
+}

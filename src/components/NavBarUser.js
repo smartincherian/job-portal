@@ -44,6 +44,10 @@ export function NavBarUser(props) {
       });
   };
 
+  const dasbhboardHandler = () => {
+    navigate("/dashboard");
+  };
+
   const getLoggedInUser = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -109,9 +113,19 @@ export function NavBarUser(props) {
 
                     <div className="user-details">
                       <p>EmailId: {email}</p>
-                      <div onClick={logoutHandler} className="logout">
+                      <div className="navbar-dashboard">
+                        <p
+                          className="dashboard-button"
+                          onClick={dasbhboardHandler}
+                        >
+                          Dashboard
+                        </p>
+                      </div>
+                      <div className="logout">
                         {/* <Logout /> */}
-                        <p className="logout-button">Logout </p>
+                        <p className="logout-button" onClick={logoutHandler}>
+                          Logout{" "}
+                        </p>
                       </div>
                     </div>
                   </Menu>

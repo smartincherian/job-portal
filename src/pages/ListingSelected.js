@@ -23,6 +23,7 @@ import {
   deleteDoc,
   updateDoc,
 } from "firebase/firestore";
+import JobSelected from "./JobSelected";
 
 function ListingSelected() {
   const listingSelected = useSelector(
@@ -30,6 +31,7 @@ function ListingSelected() {
   );
   console.log(listingSelected);
   const { email } = useSelector((state) => state.user);
+  const { uid } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const [showApplicationForm, setShowApplicationForm] = useState(false);
   const [jobApplicantData, setJobApplicantData] = useState({});
@@ -119,8 +121,7 @@ function ListingSelected() {
       resumeFile
     ) {
       // write document
-      const documentName =
-        listingSelected.jobId + jobApplicantData.fullName.replace(/\s/g, "");
+      const documentName = listingSelected.jobId + uid;
       const jobPortalRef = collection(db, "jobPortal");
 
       const res = setDoc(doc(jobPortalRef, documentName), {
@@ -175,6 +176,7 @@ function ListingSelected() {
               });
               console.log("File available at", downloadURL);
             });
+            alert("Job applied successfully");
           }
         );
         //   .then(
@@ -194,12 +196,31 @@ function ListingSelected() {
     }
   };
   return (
-    <div>
+    <div className="listing-selected-div">
       <NavBarUser />
 
       {/* selected listing details */}
-
       <Grid container justifyContent="center" className="listing-container">
+        <Grid item xs={8} className="listing-grid-item">
+          <JobSelected />
+          <Button
+            onClick={applyButtonHandler}
+            variant="outlined"
+            color="success"
+            style={{
+              textTransform: "none",
+              width: "12.5rem",
+              borderColor: "#2bb792",
+              borderWidth: "2px",
+              backgroundColor: "#2bb792",
+              color: "white",
+            }}
+          >
+            Apply
+          </Button>
+        </Grid>
+      </Grid>
+      {/* <Grid container justifyContent="center" className="listing-container">
         <Grid item xs={8} className="listing-grid-item">
           <h2>
             <span className="listing-selected-field">Title: </span>
@@ -253,7 +274,7 @@ function ListingSelected() {
             Apply
           </Button>
         </Grid>
-      </Grid>
+      </Grid> */}
 
       {/* selected listing application form */}
       {showApplicationForm && (

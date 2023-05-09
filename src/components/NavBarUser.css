@@ -25,3 +25,9 @@
   cursor: pointer;
   padding-bottom: 5px;
 }
+
+.dashboard-button {
+  color: #8b1874;
+  /* display: inline; */
+  cursor: pointer;
+}

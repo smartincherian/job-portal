@@ -14,8 +14,10 @@ const jobListingsSlice = createSlice({
       console.log(action.payload);
       state.listingSelected = action.payload;
     },
+    
   },
 });
 
 export default jobListingsSlice.reducer;
-export const { jobListings, jobListingSelected } = jobListingsSlice.actions;
+export const { jobListings, jobListingSelected, jobListingApplied } =
+  jobListingsSlice.actions;

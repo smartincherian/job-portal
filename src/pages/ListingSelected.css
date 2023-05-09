@@ -48,9 +48,14 @@
 }
 
 .listing-selected-container-second {
-  margin-bottom: 3rem;
+  padding-bottom: 3rem;
 }
 
 .listing-field-names {
   font-weight: bold !important;
+}
+
+.listing-selected-div {
+  background-color: #a4d0a4;
+  min-height: 100vh;
 }

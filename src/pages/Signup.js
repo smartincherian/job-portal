@@ -5,12 +5,14 @@ import "./Signup.css";
 import background from "../assets/images/signup-bg.jpg";
 import logo from "../assets/images/logo.png";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const regex = /^[\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,}$/;
+  const navigate = useNavigate();
 
   const signupButtonHandler = () => {
     if (email.trim().length == 0) {
@@ -27,7 +29,8 @@ function Signup() {
         .then((userCredential) => {
           const user = userCredential.user;
           console.log(user);
-          alert(`User with email ${email} successfully added`);
+          // alert(`User with email ${email} successfully added`);
+          navigate("/listings");
         })
         .catch((error) => {
           const errorCode = error.code;

@@ -1,0 +1,46 @@
+.dashboard-grid-item:hover {
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+}
+
+.dashboard-grid-item {
+  margin-top: 2rem !important;
+  border: 1px solid #ccc;
+  background: #fff;
+  transition: box-shadow 0.3s;
+  border-radius: 5px;
+  text-align: left;
+  padding: 1rem;
+}
+
+.dashboard-selected-field {
+  font-weight: 100;
+  font-size: medium;
+}
+
+.dashboard-grid-item-2 {
+  text-align: center;
+}
+
+.dashboard-close-button {
+  margin: 0;
+  float: right;
+  cursor: pointer;
+  color: #9ba4b5;
+}
+
+.dashboard-container-2 {
+  padding-bottom: 3rem;
+}
+
+.dashboard {
+  background-color: #19a7ce;
+  min-height: 100vh;
+}
+
+.dashboard-nodata-message {
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  font-weight: 600;
+}

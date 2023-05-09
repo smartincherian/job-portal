@@ -10,6 +10,7 @@ import axios from "axios";
 import { ButtonBase, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
 function Listings() {
   const dispatch = useDispatch();
@@ -34,9 +35,9 @@ function Listings() {
   };
 
   return (
-    <div>
+    <div className="listings-div">
       <NavBarUser />
-
+      {/* <SearchBar /> */}
       <Grid
         container
         spacing={0}
