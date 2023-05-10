@@ -2,11 +2,6 @@
   margin-bottom: 2rem !important;
   padding-left: 5rem;
 }
-/* 
-body {
-  display: flex;
-  justify-content: center;
-} */
 
 .listings-grid-item:hover {
   box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);

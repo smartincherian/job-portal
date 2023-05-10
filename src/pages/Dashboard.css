@@ -29,7 +29,11 @@
 }
 
 .dashboard-container-2 {
-  padding-bottom: 3rem;
+  padding-bottom: 2rem;
+}
+
+.dashboard-container-3 {
+  /* padding-bottom: 3rem; */
 }
 
 .dashboard {

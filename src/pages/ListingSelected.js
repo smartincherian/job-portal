@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { NavBarUser } from "../components/NavBarUser";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Grid, TextField, Button } from "@mui/material";
 import "./ListingSelected.css";
 import { useNavigate } from "react-router-dom";
@@ -11,19 +10,12 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import Input from "@mui/material/Input";
 import { db, storage } from "../firebase/config";
-// import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import {
-  collection,
-  getDocs,
-  doc,
-  setDoc,
-  deleteDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { collection, doc, setDoc, updateDoc } from "firebase/firestore";
 import JobSelected from "./JobSelected";
+import swal from "sweetalert";
+import Loading from "../components/Loading";
 
 function ListingSelected() {
   const listingSelected = useSelector(
@@ -37,11 +29,18 @@ function ListingSelected() {
   const [jobApplicantData, setJobApplicantData] = useState({});
   const [jobApplicationError, setJobApplicationError] = useState({});
   const [resumeFile, setresumeFile] = useState("");
+  const todaysDate = new Date();
+  const [isLoading, setIsLoading] = useState(false);
+
+  console.log(todaysDate);
 
   const applyButtonHandler = () => {
     if (email.length == 0) {
-      alert("Login is required. Please login and apply");
-      navigate("/");
+      swal(
+        "Not logged in",
+        "Login is required. Please login and apply",
+        "error"
+      ).then(navigate("/"));
     } else {
       setShowApplicationForm(true);
     }
@@ -120,6 +119,7 @@ function ListingSelected() {
       jobApplicantData.experience &&
       resumeFile
     ) {
+      setIsLoading(true);
       // write document
       const documentName = listingSelected.jobId + uid;
       const jobPortalRef = collection(db, "jobPortal");
@@ -131,6 +131,7 @@ function ListingSelected() {
         experience: jobApplicantData.experience,
         jobId: listingSelected.jobId,
         email: email,
+        date: todaysDate,
       }).then((resp) => {
         console.log(resp);
         const storageRef = ref(storage, resumeFile.name);
@@ -151,22 +152,8 @@ function ListingSelected() {
             }
           },
           (error) => {
-            // A full list of error codes is available at
-            // https://firebase.google.com/docs/storage/web/handle-errors
-            switch (error.code) {
-              case "storage/unauthorized":
-                // User doesn't have permission to access the object
-                break;
-              case "storage/canceled":
-                // User canceled the upload
-                break;
-
-              // ...
-
-              case "storage/unknown":
-                // Unknown error occurred, inspect error.serverResponse
-                break;
-            }
+            setIsLoading(false);
+            alert(error.code);
           },
           () => {
             // Upload completed successfully, now we can get the download URL
@@ -176,22 +163,10 @@ function ListingSelected() {
               });
               console.log("File available at", downloadURL);
             });
-            alert("Job applied successfully");
+            swal("Success", "Job Applied Successfully", "success");
+            setIsLoading(false);
           }
         );
-        //   .then(
-        //     (snapshot) => {
-        //       console.log(snapshot);
-        //     }
-        //   );
-        // })
-        // .then(() => {
-        //   alert("Job application forwarded");
-        //   navigate("/listings");
-        // }
-        // )
-        // .catch((error) => {
-        //   alert(error);
       });
     }
   };
@@ -220,61 +195,6 @@ function ListingSelected() {
           </Button>
         </Grid>
       </Grid>
-      {/* <Grid container justifyContent="center" className="listing-container">
-        <Grid item xs={8} className="listing-grid-item">
-          <h2>
-            <span className="listing-selected-field">Title: </span>
-            {listingSelected.title}
-          </h2>
-          <h3>
-            <span className="listing-selected-field">Company Name: </span>
-            {listingSelected.companyName}
-          </h3>
-          <h4>
-            <span className="listing-selected-field">Location: </span>
-            {listingSelected.location}
-          </h4>
-          <h4>
-            <span className="listing-selected-field">Type: </span>
-            {listingSelected.type}
-          </h4>
-          <h4>
-            <span className="listing-selected-field">Brief Description: </span>
-            {listingSelected.briefDescription}
-          </h4>
-          <h4>
-            <span className="listing-selected-field">Requirements : </span>
-            <div className="listing-selected-list">
-              {listingSelected.requirements.map((element, array) => (
-                <li key={element}>{element}</li>
-              ))}
-            </div>
-          </h4>
-
-          <h4>
-            <span className="listing-selected-field">
-              Qualifications Required:{" "}
-            </span>
-            {listingSelected.qualifications}
-          </h4>
-
-          <Button
-            onClick={applyButtonHandler}
-            variant="outlined"
-            color="success"
-            style={{
-              textTransform: "none",
-              width: "12.5rem",
-              borderColor: "#2bb792",
-              borderWidth: "2px",
-              backgroundColor: "#2bb792",
-              color: "white",
-            }}
-          >
-            Apply
-          </Button>
-        </Grid>
-      </Grid> */}
 
       {/* selected listing application form */}
       {showApplicationForm && (
@@ -384,13 +304,6 @@ function ListingSelected() {
                       )}
                     </TableCell>
                   </TableRow>
-
-                  {/* <TableRow>
-                    <TableCell>Attach Resume :</TableCell>
-                    <TableCell align="right">
-                      <TextField />
-                    </TableCell>
-                  </TableRow> */}
                 </TableBody>
               </Table>
               <div className="listing-selected-button-div">
@@ -429,59 +342,9 @@ function ListingSelected() {
                 Submit
               </Button>
             </TableContainer>
+            {isLoading && <Loading />}
           </Grid>
         </Grid>
-        // <Grid container justifyContent="center" className="listing-container">
-        //   <Grid item xs={8}>
-        //     <Grid
-        //       direction="column"
-        //       container
-        //       spacing={2}
-        //       className="signup-container"
-        //     >
-        //       <Grid item xs={8}>
-        //         <TextField
-        //           label="Email"
-        //           variant="outlined"
-        //           // value={email}
-        //           // onChange={(event) => setEmail(event.target.value)}
-        //           size="small"
-        //           InputLabelProps={{ style: { fontSize: 13 } }}
-        //         />
-        //       </Grid>
-
-        //       <Grid item xs={12}>
-        //         <TextField
-        //           label="Password"
-        //           variant="outlined"
-        //           type="password"
-        //           // value={password}
-        //           // onChange={(event) => setPassword(event.target.value)}
-        //           size="small"
-        //           InputLabelProps={{ style: { fontSize: 13 } }}
-        //         />
-        //       </Grid>
-
-        //       <Grid item xs={12}>
-        //         <TextField
-        //           label="Confirm Password"
-        //           variant="outlined"
-        //           type="password"
-        //           // value={confirmPassword}
-
-        //           size="small"
-        //           InputLabelProps={{ style: { fontSize: 13 } }}
-        //         />
-        //       </Grid>
-
-        //       <Grid item xs={12}>
-        //         <Button type="submit" variant="contained" color="primary">
-        //           Signup
-        //         </Button>
-        //       </Grid>
-        //     </Grid>
-        //   </Grid>
-        // </Grid>
       )}
     </div>
   );

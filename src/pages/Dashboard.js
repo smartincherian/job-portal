@@ -2,65 +2,56 @@ import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
 import { NavBarUser } from "../components/NavBarUser";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid, TextField, Button } from "@mui/material";
+import { Grid, Button } from "@mui/material";
 import { db } from "../firebase/config";
-import {
-  collection,
-  getDocs,
-  doc,
-  setDoc,
-  deleteDoc,
-  updateDoc,
-  query,
-  where,
-} from "firebase/firestore";
-import { jobListingApplied } from "../features/jobListingsSlice";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { DataGrid } from "@mui/x-data-grid";
-import { Link } from "react-router-dom";
 import SavedSearchSharpIcon from "@mui/icons-material/SavedSearchSharp";
-import { jobListingSelected, jobListings } from "../features/jobListingsSlice";
+import { jobListingSelected } from "../features/jobListingsSlice";
 import JobSelected from "./JobSelected";
+import LinearProgress from "@mui/material/LinearProgress";
 
 function Dashboard() {
   const { email } = useSelector((state) => state.user);
   const { listings } = useSelector((state) => state.listings);
-  //   console.log(listings);
   const [jobsApplied, setJobsApplied] = useState([]);
+  const [jobsApplicationData, setJobsApplicationData] = useState([]);
   const dispatch = useDispatch();
   const [showJobSelected, setShowJobSelected] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedJobAppliedDate, setSelectedJobAppliedDate] = useState();
 
   useEffect(() => {
     fetchJobsApplied();
   }, []);
 
   const fetchJobsApplied = async () => {
+    setIsLoading(true);
     // get firebase document
     const jobPortalRef = collection(db, "jobPortal");
     const q = query(jobPortalRef, where("email", "==", email));
     const querySnapshot = await getDocs(q);
-    // console.log(querySnapshot);
-    let jobsArray = [];
+    console.log(querySnapshot);
+
+    let jobsApplicationData = [];
     querySnapshot.forEach((doc) => {
-      //   console.log(doc.data());
-      //   console.log(doc.data().fullName);
-      jobsArray.push(doc.data().jobId);
+      jobsApplicationData.push({
+        jobId: doc.data().jobId,
+        date: doc.data().date,
+      });
     });
-    // dispatch(jobListingApplied(jobsArray));
     let filteredListings = [];
-    jobsArray.map((appliedJobid) => {
+    setJobsApplicationData(jobsApplicationData);
+    jobsApplicationData.map((item) => {
+      console.log(item);
       listings.map((listing) => {
-        if (appliedJobid == listing.jobId) {
+        if (item.jobId == listing.jobId) {
           filteredListings.push(listing);
         }
       });
     });
     setJobsApplied(filteredListings);
+    setIsLoading(false);
   };
   console.log(jobsApplied);
   const columns = [
@@ -85,13 +76,7 @@ function Dashboard() {
       flex: 1,
       headerAlign: "center",
       align: "center",
-      // getActions: (params) => [
-      //   <Button size="small" onClick={() => console.log(params.row._id)}>
-      //
-      //   </Button>,
-      // ],
       renderCell: (row) => {
-        // dispatch(jobListingSelected(row));
         return (
           <Button size="small" onClick={() => viewMoreClickHandler(row)}>
             <SavedSearchSharpIcon />
@@ -102,10 +87,17 @@ function Dashboard() {
   ];
 
   const viewMoreClickHandler = (row) => {
-    console.log(row.row);
     dispatch(jobListingSelected(row.row));
+    jobsApplicationData.map((job) => {
+      if (row.row.jobId == job.jobId) {
+        const date = job.date.toDate().toLocaleDateString();
+        setSelectedJobAppliedDate(date);
+      }
+    });
     setShowJobSelected(true);
   };
+  console.log("Hey there");
+  console.log(selectedJobAppliedDate);
 
   const closeButtonHandler = () => {
     setShowJobSelected(false);
@@ -149,7 +141,9 @@ function Dashboard() {
                       </p>
                     </div>
                   ),
+                  loadingOverlay: LinearProgress,
                 }}
+                loading={isLoading}
               />
             </Grid>
           </Grid>
@@ -157,18 +151,28 @@ function Dashboard() {
       </Grid>
 
       {showJobSelected && (
-        <Grid
-          container
-          justifyContent="center"
-          className="dashboard-container-2"
-        >
-          <Grid item xs={8} className="listing-grid-item">
-            <p className="dashboard-close-button" onClick={closeButtonHandler}>
-              X
-            </p>
-            <JobSelected />
+        <>
+          <Grid
+            container
+            justifyContent="center"
+            className="dashboard-container-2"
+          >
+            <Grid item xs={8} className="listing-grid-item">
+              <p
+                className="dashboard-close-button"
+                onClick={closeButtonHandler}
+              >
+                X
+              </p>
+              <JobSelected />
+              {/* data from firebase */}
+              <h4>
+                <span className="listing-selected-field">Applied Date: </span>
+                {selectedJobAppliedDate}
+              </h4>
+            </Grid>
           </Grid>
-        </Grid>
+        </>
       )}
     </div>
   );

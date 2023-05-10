@@ -6,6 +6,8 @@ import background from "../assets/images/signup-bg.jpg";
 import logo from "../assets/images/logo.png";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import Loading from "../components/Loading";
+import swal from "sweetalert";
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -13,31 +15,71 @@ function Signup() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const regex = /^[\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,}$/;
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [signupFormError, setSignupFormError] = useState({});
 
   const signupButtonHandler = () => {
     if (email.trim().length == 0) {
-      alert("Enter email");
+      setSignupFormError((prevState) => ({
+        ...prevState,
+        ["emailIsBlank"]: true,
+      }));
     } else if (!regex.test(email)) {
-      alert("Entered email is not valid");
-    } else if (password.trim().length == 0) {
-      alert("Enter password");
-    } else if (password != confirmPassword) {
-      alert("Passwords do not match");
+      setSignupFormError((prevState) => ({
+        ...prevState,
+        ["emailIsBlank"]: false,
+        ["emailIsInvalid"]: true,
+      }));
     } else {
+      setSignupFormError((prevState) => ({
+        ...prevState,
+        ["emailIsBlank"]: false,
+        ["emailIsInvalid"]: false,
+      }));
+    }
+
+    if (password.trim().length == 0) {
+      setSignupFormError((prevState) => ({
+        ...prevState,
+        ["passwordIsBlank"]: true,
+      }));
+    } else {
+      setSignupFormError((prevState) => ({
+        ...prevState,
+        ["passwordIsBlank"]: false,
+      }));
+    }
+
+    if (password != confirmPassword) {
+      setSignupFormError((prevState) => ({
+        ...prevState,
+        ["passwordsNotSame"]: true,
+      }));
+    } else {
+      setSignupFormError((prevState) => ({
+        ...prevState,
+        ["passwordsNotSame"]: false,
+      }));
+    }
+
+    if (
+      email.trim().length != 0 &&
+      regex.test(email) &&
+      password.trim().length != 0 &&
+      password == confirmPassword
+    ) {
+      setIsLoading(true);
       const auth = getAuth();
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
           console.log(user);
-          // alert(`User with email ${email} successfully added`);
+          setIsLoading(false);
           navigate("/listings");
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode);
-          console.log(errorMessage);
-          alert(errorMessage);
+          setIsLoading(false);
+          swal(error.code, error.message, "error");
         });
     }
   };
@@ -74,6 +116,12 @@ function Signup() {
                 size="small"
                 InputLabelProps={{ style: { fontSize: 13 } }}
               />
+              {signupFormError.emailIsBlank && (
+                <p className="login-error">* Email is blank</p>
+              )}
+              {signupFormError.emailIsInvalid && (
+                <p className="login-error">* Email is invalid</p>
+              )}
             </Grid>
 
             <Grid item xs={12}>
@@ -86,6 +134,9 @@ function Signup() {
                 size="small"
                 InputLabelProps={{ style: { fontSize: 13 } }}
               />
+              {signupFormError.passwordIsBlank && (
+                <p className="login-error">* Password is blank</p>
+              )}
             </Grid>
 
             <Grid item xs={12}>
@@ -98,6 +149,9 @@ function Signup() {
                 size="small"
                 InputLabelProps={{ style: { fontSize: 13 } }}
               />
+              {signupFormError.passwordsNotSame && (
+                <p className="login-error">* Passwords do not match</p>
+              )}
             </Grid>
 
             <Grid item xs={12}>
@@ -111,6 +165,7 @@ function Signup() {
               </Button>
             </Grid>
           </Grid>
+          {isLoading && <Loading />}
         </Grid>
       </Grid>
     </div>

@@ -6,8 +6,6 @@ import Paper from "@mui/material/Paper";
 import logo from "../assets/images/logo.png";
 import "./Home.css";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
 import company1 from "../assets/images/zomato.webp";
 import company2 from "../assets/images/byjus.webp";
 import company3 from "../assets/images/burger.webp";
@@ -18,17 +16,7 @@ import { NavBar } from "../components/NavBar";
 import { Link } from "react-router-dom";
 import Login from "./Login";
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
-
 export function HomePage(props) {
-  const signupButtonHandler = () => {};
-
   return (
     <>
       <NavBar />
@@ -94,16 +82,8 @@ export function HomePage(props) {
                   </Button>
                 </Link>
               </Grid>
-
-              {/* </Grid> */}
             </Grid>
           </Grid>
-          {/* <Grid item xs={4}>
-          <Item>xs=4</Item>
-        </Grid>
-        <Grid item xs={8}>
-          <Item>xs=8</Item>
-        </Grid> */}
         </Grid>
 
         <Grid
@@ -119,80 +99,15 @@ export function HomePage(props) {
                 Hire from pool of{" "}
                 <span className="second-container-span">Top Talents</span>
               </h1>
-              {/* <h1>Best candidates reach out to you directly</h1> */}
             </div>
           </Grid>
-
-          {/* second container - right part  */}
-          {/* <Grid item xs={4}>
-            <div>
-              <Grid
-                container
-                direction="column"
-                spacing={2}
-                className="homepage-login-box"
-              >
-                <Grid item>
-                  <Typography className="jobseeker-login-font">
-                    Jobseeker login
-                  </Typography>
-                  <TextField
-                    label="Username"
-                    variant="outlined"
-                    size="small"
-                    // className={classes.textField}
-                    // value={username}
-                    // onChange={handleUsernameChange}
-                    InputLabelProps={{ style: { fontSize: 13 } }}
-                    style={{
-                      width: "12.5rem",
-                    }}
-                  />
-                </Grid>
-                <Grid item>
-                  <TextField
-                    label="Password"
-                    variant="outlined"
-                    // className={classes.textField}
-                    type="password"
-                    size="small"
-                    InputLabelProps={{ style: { fontSize: 13 } }}
-                    // value={password}
-                    // onChange={handlePasswordChange}
-                    style={{
-                      width: "12.5rem",
-                    }}
-                  />
-                </Grid>
-                <Grid item>
-                  <Button
-                    variant="outlined"
-                    color="success"
-                    style={{
-                      textTransform: "none",
-                      width: "12.5rem",
-                      borderColor: "#2bb792",
-                      borderWidth: "2px",
-                      backgroundColor: "#2bb792",
-                      color: "white",
-                    }}
-                  >
-                    Login →
-                  </Button>
-                </Grid>
-              </Grid>
-            </div>
-          </Grid> */}
-
-          <Login/>
-
+          <Login />
         </Grid>
 
         {/* third container   */}
         <Grid item xs={12}>
           <div className="third-container-sentence">
             <p>4,00,000+ Top Companies Trust 7th Pillar Jobs</p>
-            {/* <h1>Best candidates reach out to you directly</h1> */}
           </div>
         </Grid>
 

@@ -1,6 +1,5 @@
 .navbaruser-div {
   font-family: "Fira Sans", sans-serif !important;
-  font-style: italic;
 }
 
 .helpMe {
@@ -30,4 +29,10 @@
   color: #8b1874;
   /* display: inline; */
   cursor: pointer;
+  margin: 0;
+}
+
+.navbaruser-sentence {
+  color: #ffead2;
+  font-weight: bolder;
 }

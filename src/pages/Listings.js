@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import "./Listings.css";
-import { auth } from "../firebase/config";
 import { NavBarUser } from "../components/NavBarUser";
-import listings from "../assets/data/joblistings.json";
 import { useDispatch, useSelector } from "react-redux";
 import { jobListingSelected, jobListings } from "../features/jobListingsSlice";
 import axios from "axios";
-import { ButtonBase, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { ButtonBase } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
 
@@ -42,12 +39,9 @@ function Listings() {
         container
         spacing={0}
         alignItems="center"
-        // justifyContent="center"
         justifyContent="flex-start"
         className="listings-container"
         direction="row"
-        // rowSpacing={1}
-        // columnSpacing={1}
       >
         {listings.map((listing) => (
           <Grid
@@ -60,8 +54,6 @@ function Listings() {
               className="listings-grid-buttonbase"
               onClick={() => listingClickHandler(listing)}
               value="Doctorate"
-              // component={Link}
-              // to={`${listing.jobId}`}
             >
               <div className="listings-grid-item-div">
                 <div className="listing-title">

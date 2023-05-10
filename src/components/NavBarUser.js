@@ -5,18 +5,14 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import "./NavBarUser.css";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-// import { Logout } from "../assets/images/logout.svg";
 import { getAuth, signOut } from "firebase/auth";
-// import { auth } from "../firebase/config";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { reset, signin } from "../features/loggedInUserSlice";
-import { Link } from "react-router-dom";
+import logo from "../assets/images/logo.png";
 
 export function NavBarUser(props) {
   const dispatch = useDispatch();
@@ -48,6 +44,10 @@ export function NavBarUser(props) {
     navigate("/dashboard");
   };
 
+  const homeHandler = () => {
+    navigate("/");
+  };
+
   const getLoggedInUser = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -74,13 +74,16 @@ export function NavBarUser(props) {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" style={{ background: "#4D5139" }}>
           <Toolbar variant="dense">
+            <div>
+              <img src={logo} width="60" height="40"></img>
+            </div>
             <Typography
               variant="subtitle1"
               component="div"
               sx={{ flexGrow: 1 }}
+              className="navbaruser-sentence"
             >
-              7th Pillar Jobs : Connecting job seekers with their dream career
-              opportunities - your one-stop-shop for all job-related needs.🎉{" "}
+              Welcome to 7th Pillar Jobs : Connecting talent with opportunity.
             </Typography>
             {userLoggedIn && (
               <div>
@@ -119,6 +122,10 @@ export function NavBarUser(props) {
                           onClick={dasbhboardHandler}
                         >
                           Dashboard
+                        </p>
+
+                        <p className="dashboard-button" onClick={homeHandler}>
+                          Home
                         </p>
                       </div>
                       <div className="logout">
