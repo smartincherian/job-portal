@@ -13,3 +13,16 @@
 .search-bar-div {
   display: inline-flex;
 }
+
+.search {
+  margin-top: 3rem;
+  width: 400px;
+  /* height: 40px; */
+  border-radius: 40px;
+  /* box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); */
+  /* transform: translate(-50%, -50%); */
+  /* background: #fff; */
+  /* transition: all 0.3s ease; */
+  padding: 0.5rem;
+  font-size: medium;
+}

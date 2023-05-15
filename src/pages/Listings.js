@@ -24,7 +24,7 @@ function Listings() {
   };
 
   const { listings } = useSelector((state) => state.listings);
-  console.log(listings);
+  // console.log(listings);
 
   const listingClickHandler = (listing) => {
     dispatch(jobListingSelected(listing));

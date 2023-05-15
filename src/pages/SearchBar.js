@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SearchBar.css";
-import { TextField } from "@mui/material";
+import { jobSearch } from "../features/searchSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function SearchBar() {
+  const [searchInput, setSearchInput] = useState("");
+  const dispatch = useDispatch();
+
   return (
     <div className="search-bar-div">
-      <div className="search-bar">
-        <TextField variant="standard"></TextField>
-      </div>
-      <div className="search-bar-button">
-        <button type="submit" className="search-button">
-          Search
-        </button>
-      </div>
+      <input
+        type="text"
+        placeholder="Search for job postings by keyword or location"
+        className="search"
+        onChange={(e) => dispatch(jobSearch(e.target.value))}
+      ></input>
     </div>
   );
 }

@@ -23,6 +23,7 @@ function Signup() {
       setSignupFormError((prevState) => ({
         ...prevState,
         ["emailIsBlank"]: true,
+        ["emailIsInvalid"]: false,
       }));
     } else if (!regex.test(email)) {
       setSignupFormError((prevState) => ({
@@ -112,7 +113,13 @@ function Signup() {
                 label="Email"
                 variant="outlined"
                 value={email}
-                onChange={(event) => setEmail(event.target.value)}
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                  setSignupFormError((prevState) => ({
+                    ...prevState,
+                    ["emailIsBlank"]: false,
+                  }));
+                }}
                 size="small"
                 InputLabelProps={{ style: { fontSize: 13 } }}
               />
@@ -130,7 +137,13 @@ function Signup() {
                 variant="outlined"
                 type="password"
                 value={password}
-                onChange={(event) => setPassword(event.target.value)}
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                  setSignupFormError((prevState) => ({
+                    ...prevState,
+                    ["passwordIsBlank"]: false,
+                  }));
+                }}
                 size="small"
                 InputLabelProps={{ style: { fontSize: 13 } }}
               />

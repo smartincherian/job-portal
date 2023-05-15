@@ -6,13 +6,16 @@ import Typography from "@mui/material/Typography";
 import "./NavBarUser.css";
 import IconButton from "@mui/material/IconButton";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import Menu from "@mui/material/Menu";
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { reset, signin } from "../features/loggedInUserSlice";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/logoNavbar.png";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { Button } from "@mui/material";
 
 export function NavBarUser(props) {
   const dispatch = useDispatch();
@@ -51,7 +54,7 @@ export function NavBarUser(props) {
   const getLoggedInUser = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user);
+        // console.log(user);
         const email = user.email;
         const uid = user.uid;
         dispatch(signin({ email, uid }));
@@ -68,14 +71,32 @@ export function NavBarUser(props) {
     getLoggedInUser();
   }, []);
 
+  const backButtonHandler = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="navbaruser-div">
       <span className="helpMe">All Glory to God</span>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" style={{ background: "#4D5139" }}>
           <Toolbar variant="dense">
+            <Button
+              onClick={backButtonHandler}
+              style={{
+                color: "white",
+              }}
+            >
+              <ArrowBackIosIcon />
+            </Button>
             <div>
-              <img src={logo} width="60" height="40"></img>
+              <img
+                src={logo}
+                width="45"
+                height="35"
+                onClick={homeHandler}
+                className="logo"
+              ></img>
             </div>
             <Typography
               variant="subtitle1"
@@ -93,6 +114,7 @@ export function NavBarUser(props) {
                   aria-controls="menu-appbar"
                   aria-haspopup="true"
                   onClick={handleMenu}
+                  color="inherit"
                 >
                   <AccountCircle />
                 </IconButton>
@@ -112,7 +134,7 @@ export function NavBarUser(props) {
                     open={Boolean(viewUserDetails)}
                     onClick={hideUserDetails}
                   >
-                    {console.log(email)}
+                    {/* {console.log(email)} */}
 
                     <div className="user-details">
                       <p>EmailId: {email}</p>

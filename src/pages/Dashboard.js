@@ -7,9 +7,10 @@ import { db } from "../firebase/config";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { DataGrid } from "@mui/x-data-grid";
 import SavedSearchSharpIcon from "@mui/icons-material/SavedSearchSharp";
-import { jobListingSelected } from "../features/jobListingsSlice";
-import JobSelected from "./JobSelected";
+import { jobListingSelected, jobListings } from "../features/jobListingsSlice";
+import JobSelected from "../components/JobSelected";
 import LinearProgress from "@mui/material/LinearProgress";
+import axios from "axios";
 
 function Dashboard() {
   const { email } = useSelector((state) => state.user);
@@ -21,17 +22,25 @@ function Dashboard() {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedJobAppliedDate, setSelectedJobAppliedDate] = useState();
 
+  const fetchJobListings = async () => {
+    axios.get("./joblistings.json").then((res) => {
+      dispatch(jobListings(res.data));
+    });
+  };
+
   useEffect(() => {
     fetchJobsApplied();
-  }, []);
+    //to prevent data lost after refresh
+    fetchJobListings();
+  }, [email]);
 
   const fetchJobsApplied = async () => {
     setIsLoading(true);
     // get firebase document
     const jobPortalRef = collection(db, "jobPortal");
+    console.log(email);
     const q = query(jobPortalRef, where("email", "==", email));
     const querySnapshot = await getDocs(q);
-    console.log(querySnapshot);
 
     let jobsApplicationData = [];
     querySnapshot.forEach((doc) => {
@@ -40,10 +49,12 @@ function Dashboard() {
         date: doc.data().date,
       });
     });
+    // console.log(jobsApplicationData);
+
     let filteredListings = [];
     setJobsApplicationData(jobsApplicationData);
     jobsApplicationData.map((item) => {
-      console.log(item);
+      // console.log(item);
       listings.map((listing) => {
         if (item.jobId == listing.jobId) {
           filteredListings.push(listing);
@@ -53,7 +64,7 @@ function Dashboard() {
     setJobsApplied(filteredListings);
     setIsLoading(false);
   };
-  console.log(jobsApplied);
+  // console.log(jobsApplied);
   const columns = [
     {
       field: "title",
@@ -96,8 +107,8 @@ function Dashboard() {
     });
     setShowJobSelected(true);
   };
-  console.log("Hey there");
-  console.log(selectedJobAppliedDate);
+
+  // console.log(selectedJobAppliedDate);
 
   const closeButtonHandler = () => {
     setShowJobSelected(false);

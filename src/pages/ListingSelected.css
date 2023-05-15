@@ -56,3 +56,7 @@
   background-color: #a4d0a4;
   min-height: 100vh;
 }
+
+.uploaded-resume {
+  margin-top: 1rem !important;
+}

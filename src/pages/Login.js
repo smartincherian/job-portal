@@ -23,6 +23,7 @@ function Login() {
       setLoginFormError((prevState) => ({
         ...prevState,
         ["emailIsBlank"]: true,
+        ["emailIsInvalid"]: false,
       }));
     } else if (!regex.test(email)) {
       setLoginFormError((prevState) => ({
@@ -69,6 +70,12 @@ function Login() {
     }
   };
 
+  const enterKeyHandler = (e) => {
+    if (e.key == "Enter") {
+      loginButtonHandler();
+    }
+  };
+
   return (
     <>
       {/* second container - right part  */}
@@ -85,7 +92,13 @@ function Login() {
                 Jobseeker login
               </Typography>
               <TextField
-                onChange={(event) => setEmail(event.target.value)}
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                  setLoginFormError((prevState) => ({
+                    ...prevState,
+                    ["emailIsBlank"]: false,
+                  }));
+                }}
                 label="Email"
                 variant="outlined"
                 size="small"
@@ -105,7 +118,14 @@ function Login() {
             <Grid item>
               <TextField
                 label="Password"
-                onChange={(event) => setPassword(event.target.value)}
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                  setLoginFormError((prevState) => ({
+                    ...prevState,
+                    ["passwordIsBlank"]: false,
+                  }));
+                }}
+                onKeyDown={enterKeyHandler}
                 variant="outlined"
                 type="password"
                 size="small"

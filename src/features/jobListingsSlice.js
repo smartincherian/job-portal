@@ -7,14 +7,13 @@ const jobListingsSlice = createSlice({
   initialState,
   reducers: {
     jobListings: (state, action) => {
-      console.log(action.payload);
+      // console.log(action.payload);
       state.listings = action.payload;
     },
     jobListingSelected: (state, action) => {
-      console.log(action.payload);
+      // console.log(action.payload);
       state.listingSelected = action.payload;
     },
-    
   },
 });
 

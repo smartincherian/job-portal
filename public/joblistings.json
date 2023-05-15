@@ -77,5 +77,242 @@
       "Should have knowledge on running the blockchain locally."
     ],
     "qualifications": "Required min of 2 years experience in EVM(geth) blockchain development.Required min of 4 years experience in Go lang development. "
+  },
+  {
+    "jobId": "job6",
+    "title": "Mern Stack Developer",
+    "companyName": "CP Global",
+    "location": "Remote",
+    "type": "Full Time",
+    "briefDescription": "CP GLobal is looking for an experienced HTML developer to oversee the design, coding, and implementation of website projects for our clients.",
+    "requirements": [
+      "Developing and designing front-end web architecture.",
+      "Building interactive consumer data from multiple systems.",
+      "Define code architecture decisions to support high-performance products.",
+      "Translate wireframes and PSD Designs into functional web applications.",
+      "Work with development teams and managers to ideate software solutions"
+    ],
+    "qualifications": "Minimum 2 years of experience with React js and Minimum 1 year of experience with Node js"
+  },
+  {
+    "jobId": "job7",
+    "title": "Architect I - Enterprise Solutions",
+    "companyName": "Buyer Corporation",
+    "location": "Thiruvananthapuram",
+    "type": "Full Time",
+    "briefDescription": "Buyer Corporation is looking for a independent developer who can review and design solutions in their assigned area of responsibility on ERP/CRM systems. ",
+    "requirements": [
+      "Act creatively to develop applications and select appropriate technical options. Optimize application development maintenance and performance by employing design patterns and by reusing proven solutions while accounting for others' developmental activities",
+      "Develop technical documents such as Functional Design Specifications Deployment documentation",
+      "Perform design document reviews peer code reviews and suggest code improvements",
+      "A single point of contact for the build and deployment issues and resolve them on time",
+      "Learn technology business domain system domain individually and as recommended by the project/account"
+    ],
+    "qualifications": "8 to 10 years of hands on experience in Java / Spring ? Should have at least 3 years hands on SAP Hybris Experience in Architecting SAP o Strong expertise with Groovy scripts. Experience with full lifecycle implementation and complex integrations with SAP and non-SAP systems, other cloud systems using CPI. "
+  },
+  {
+    "jobId": "job8",
+    "title": "Senior NodeJs Engineer",
+    "companyName": "CP Global",
+    "location": "Ahmedabad, Gujarat",
+    "type": "Full Time",
+    "briefDescription": "CP Global is seeking creative and motivated Senior NodeJs developers to be part of our Technology Team.",
+    "requirements": [
+      "Developing and maintaining all server-side network components.",
+      "Ensuring optimal performance of the central database and responsiveness to front-end requests.",
+      "Collaborating with front-end developers on the integration of elements.",
+      "Designing customer-facing UI and back-end services for various business processes.",
+      "Developing high-performance applications by writing testable, reusable, and efficient code."
+    ],
+    "qualifications": "At least five years' experience as a Node.js developer. Extensive knowledge of JavaScript, Typescript, web stacks, libraries, and frameworks. Decent knowledge and experience with GraphQL. "
+  },
+  {
+    "jobId": "job9",
+    "title": "Technical Lead",
+    "companyName": "FareFirst",
+    "location": "Kochi, Kerala",
+    "type": "Full Time",
+    "briefDescription": "FareFirst is seeking a highly skilled and passionate Tech Lead to join our team in Kochi. The ideal candidate will have a deep understanding of software development and engineering principles, experience leading a team of developers, and the ability to solve complex problems with innovative solutions.",
+    "requirements": [
+      "Lead and manage a team of developers to deliver high-quality software solutions",
+      "Collaborate with cross-functional teams to identify business requirements and develop technical specifications",
+      "Design and implement software solutions that meet business requirements",
+      "Provide technical guidance and mentorship to team members",
+      "Evaluate and recommend new technologies and tools to improve software development processes"
+    ],
+    "qualifications": "At least 5 years of experience in software development, with a minimum of 2 years in a leadership role. Strong knowledge of software development principles, including software design patterns, agile methodologies, and version control systems    Proficient in at least one programming language such as Java, Python, or JavaScript. "
+  },
+  {
+    "jobId": "job10",
+    "title": "EVM Blockchain Developer",
+    "companyName": "Dojima Network",
+    "location": "Remote",
+    "type": "Full Time",
+    "briefDescription": "Dojima Network is having  immediate openings for Cosmos Blockchain Engineers with IT Industry experience and good technical knowledge . Would like to have someone who can work independently with not much guidance. Good growth potential with this opening.",
+    "requirements": [
+      "Should have in depth knowledge on EVM Blockchain and to develop customised blockchain.",
+      "Should have knowledge on deploying blockchain to the cloud.",
+      "Should have experience in writing test cases for blockchain level code.",
+      "Should have knowledge on running the blockchain locally."
+    ],
+    "qualifications": "Required min of 2 years experience in EVM(geth) blockchain development.Required min of 4 years experience in Go lang development. "
+  },
+  {
+    "jobId": "job11",
+    "title": "Mern Stack Developer",
+    "companyName": "AP Global",
+    "location": "Remote",
+    "type": "Full Time",
+    "briefDescription": "AP GLobal is looking for an experienced HTML developer to oversee the design, coding, and implementation of website projects for our clients.",
+    "requirements": [
+      "Developing and designing front-end web architecture.",
+      "Building interactive consumer data from multiple systems.",
+      "Define code architecture decisions to support high-performance products.",
+      "Translate wireframes and PSD Designs into functional web applications.",
+      "Work with development teams and managers to ideate software solutions"
+    ],
+    "qualifications": "Minimum 2 years of experience with React js and Minimum 1 year of experience with Node js"
+  },
+  {
+    "jobId": "job12",
+    "title": "Architect I - Enterprise Solutions",
+    "companyName": "Salesman Corporation",
+    "location": "Thiruvananthapuram",
+    "type": "Full Time",
+    "briefDescription": "Khusaki Technologies is looking for a independent developer who can review and design solutions in their assigned area of responsibility on ERP/CRM systems. ",
+    "requirements": [
+      "Act creatively to develop applications and select appropriate technical options. Optimize application development maintenance and performance by employing design patterns and by reusing proven solutions while accounting for others' developmental activities",
+      "Develop technical documents such as Functional Design Specifications Deployment documentation",
+      "Perform design document reviews peer code reviews and suggest code improvements",
+      "A single point of contact for the build and deployment issues and resolve them on time",
+      "Learn technology business domain system domain individually and as recommended by the project/account"
+    ],
+    "qualifications": "8 to 10 years of hands on experience in Java / Spring ? Should have at least 3 years hands on SAP Hybris Experience in Architecting SAP o Strong expertise with Groovy scripts. Experience with full lifecycle implementation and complex integrations with SAP and non-SAP systems, other cloud systems using CPI. "
+  },
+  {
+    "jobId": "job13",
+    "title": "Senior NodeJs Engineer",
+    "companyName": "AP Global",
+    "location": "Ahmedabad, Gujarat",
+    "type": "Full Time",
+    "briefDescription": "Gridcamp is seeking creative and motivated Senior NodeJs developers to be part of our Technology Team.",
+    "requirements": [
+      "Developing and maintaining all server-side network components.",
+      "Ensuring optimal performance of the central database and responsiveness to front-end requests.",
+      "Collaborating with front-end developers on the integration of elements.",
+      "Designing customer-facing UI and back-end services for various business processes.",
+      "Developing high-performance applications by writing testable, reusable, and efficient code."
+    ],
+    "qualifications": "At least five years' experience as a Node.js developer. Extensive knowledge of JavaScript, Typescript, web stacks, libraries, and frameworks. Decent knowledge and experience with GraphQL. "
+  },
+  {
+    "jobId": "job14",
+    "title": "Technical Lead",
+    "companyName": "Salesman Corporation",
+    "location": "Kochi, Kerala",
+    "type": "Full Time",
+    "briefDescription": "FareFirst is seeking a highly skilled and passionate Tech Lead to join our team in Kochi. The ideal candidate will have a deep understanding of software development and engineering principles, experience leading a team of developers, and the ability to solve complex problems with innovative solutions.",
+    "requirements": [
+      "Lead and manage a team of developers to deliver high-quality software solutions",
+      "Collaborate with cross-functional teams to identify business requirements and develop technical specifications",
+      "Design and implement software solutions that meet business requirements",
+      "Provide technical guidance and mentorship to team members",
+      "Evaluate and recommend new technologies and tools to improve software development processes"
+    ],
+    "qualifications": "At least 5 years of experience in software development, with a minimum of 2 years in a leadership role. Strong knowledge of software development principles, including software design patterns, agile methodologies, and version control systems    Proficient in at least one programming language such as Java, Python, or JavaScript. "
+  },
+  {
+    "jobId": "job15",
+    "title": "EVM Blockchain Developer",
+    "companyName": "Salesman Corporation",
+    "location": "Remote",
+    "type": "Full Time",
+    "briefDescription": "Dojima Network is having  immediate openings for Cosmos Blockchain Engineers with IT Industry experience and good technical knowledge . Would like to have someone who can work independently with not much guidance. Good growth potential with this opening.",
+    "requirements": [
+      "Should have in depth knowledge on EVM Blockchain and to develop customised blockchain.",
+      "Should have knowledge on deploying blockchain to the cloud.",
+      "Should have experience in writing test cases for blockchain level code.",
+      "Should have knowledge on running the blockchain locally."
+    ],
+    "qualifications": "Required min of 2 years experience in EVM(geth) blockchain development.Required min of 4 years experience in Go lang development. "
+  },
+  {
+    "jobId": "job16",
+    "title": "Mern Stack Developer",
+    "companyName": "CP Global",
+    "location": "Remote",
+    "type": "Full Time",
+    "briefDescription": "CP GLobal is looking for an experienced HTML developer to oversee the design, coding, and implementation of website projects for our clients.",
+    "requirements": [
+      "Developing and designing front-end web architecture.",
+      "Building interactive consumer data from multiple systems.",
+      "Define code architecture decisions to support high-performance products.",
+      "Translate wireframes and PSD Designs into functional web applications.",
+      "Work with development teams and managers to ideate software solutions"
+    ],
+    "qualifications": "Minimum 2 years of experience with React js and Minimum 1 year of experience with Node js"
+  },
+  {
+    "jobId": "job17",
+    "title": "Architect I - Enterprise Solutions",
+    "companyName": "Buyer Corporation",
+    "location": "Thiruvananthapuram",
+    "type": "Full Time",
+    "briefDescription": "Buyer Corporation is looking for a independent developer who can review and design solutions in their assigned area of responsibility on ERP/CRM systems. ",
+    "requirements": [
+      "Act creatively to develop applications and select appropriate technical options. Optimize application development maintenance and performance by employing design patterns and by reusing proven solutions while accounting for others' developmental activities",
+      "Develop technical documents such as Functional Design Specifications Deployment documentation",
+      "Perform design document reviews peer code reviews and suggest code improvements",
+      "A single point of contact for the build and deployment issues and resolve them on time",
+      "Learn technology business domain system domain individually and as recommended by the project/account"
+    ],
+    "qualifications": "8 to 10 years of hands on experience in Java / Spring ? Should have at least 3 years hands on SAP Hybris Experience in Architecting SAP o Strong expertise with Groovy scripts. Experience with full lifecycle implementation and complex integrations with SAP and non-SAP systems, other cloud systems using CPI. "
+  },
+  {
+    "jobId": "job18",
+    "title": "Senior NodeJs Engineer",
+    "companyName": "CP Global",
+    "location": "Ahmedabad, Gujarat",
+    "type": "Full Time",
+    "briefDescription": "CP Global is seeking creative and motivated Senior NodeJs developers to be part of our Technology Team.",
+    "requirements": [
+      "Developing and maintaining all server-side network components.",
+      "Ensuring optimal performance of the central database and responsiveness to front-end requests.",
+      "Collaborating with front-end developers on the integration of elements.",
+      "Designing customer-facing UI and back-end services for various business processes.",
+      "Developing high-performance applications by writing testable, reusable, and efficient code."
+    ],
+    "qualifications": "At least five years' experience as a Node.js developer. Extensive knowledge of JavaScript, Typescript, web stacks, libraries, and frameworks. Decent knowledge and experience with GraphQL. "
+  },
+  {
+    "jobId": "job19",
+    "title": "Technical Lead",
+    "companyName": "FareFirst",
+    "location": "Kochi, Kerala",
+    "type": "Full Time",
+    "briefDescription": "FareFirst is seeking a highly skilled and passionate Tech Lead to join our team in Kochi. The ideal candidate will have a deep understanding of software development and engineering principles, experience leading a team of developers, and the ability to solve complex problems with innovative solutions.",
+    "requirements": [
+      "Lead and manage a team of developers to deliver high-quality software solutions",
+      "Collaborate with cross-functional teams to identify business requirements and develop technical specifications",
+      "Design and implement software solutions that meet business requirements",
+      "Provide technical guidance and mentorship to team members",
+      "Evaluate and recommend new technologies and tools to improve software development processes"
+    ],
+    "qualifications": "At least 5 years of experience in software development, with a minimum of 2 years in a leadership role. Strong knowledge of software development principles, including software design patterns, agile methodologies, and version control systems    Proficient in at least one programming language such as Java, Python, or JavaScript. "
+  },
+  {
+    "jobId": "job20",
+    "title": "EVM Blockchain Developer",
+    "companyName": "Dojima Network",
+    "location": "Remote",
+    "type": "Full Time",
+    "briefDescription": "Dojima Network is having  immediate openings for Cosmos Blockchain Engineers with IT Industry experience and good technical knowledge . Would like to have someone who can work independently with not much guidance. Good growth potential with this opening.",
+    "requirements": [
+      "Should have in depth knowledge on EVM Blockchain and to develop customised blockchain.",
+      "Should have knowledge on deploying blockchain to the cloud.",
+      "Should have experience in writing test cases for blockchain level code.",
+      "Should have knowledge on running the blockchain locally."
+    ],
+    "qualifications": "Required min of 2 years experience in EVM(geth) blockchain development.Required min of 4 years experience in Go lang development. "
   }
 ]

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavBarUser } from "../components/NavBarUser";
 import { useSelector } from "react-redux";
 import { Grid, TextField, Button } from "@mui/material";
@@ -12,16 +12,31 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { db, storage } from "../firebase/config";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { collection, doc, setDoc, updateDoc } from "firebase/firestore";
-import JobSelected from "./JobSelected";
+import {
+  collection,
+  doc,
+  setDoc,
+  updateDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
+import JobSelected from "../components/JobSelected";
 import swal from "sweetalert";
 import Loading from "../components/Loading";
+import LoadingBackdrop from "../components/LoadingBackdrop/LoadingBackdrop";
+import { Link } from "react-router-dom";
 
 function ListingSelected() {
+  const { listings } = useSelector((state) => state.listings);
   const listingSelected = useSelector(
     (state) => state.listings.listingSelected
   );
-  console.log(listingSelected);
+  // const { jobId } = listingSelected;
+
+  const jobId = listingSelected ? listingSelected.jobId : console.log("error");
+
+  console.log(jobId);
   const { email } = useSelector((state) => state.user);
   const { uid } = useSelector((state) => state.user);
   const navigate = useNavigate();
@@ -31,8 +46,41 @@ function ListingSelected() {
   const [resumeFile, setresumeFile] = useState("");
   const todaysDate = new Date();
   const [isLoading, setIsLoading] = useState(false);
+  // const [alreadyAppliedJobData, setAlreadyAppliedJobData] = useState({});
+  const [isJobAlreadyApplied, setIsJobAlreadyApplied] = useState(null);
+  // console.log(todaysDate);
 
-  console.log(todaysDate);
+  useEffect(() => {
+    fetchJobsApplied();
+
+    if (!listingSelected) {
+      navigate("/listings");
+    }
+  }, []);
+
+  const fetchJobsApplied = async () => {
+    setIsLoading(true);
+    // get firebase document
+    const jobPortalRef = collection(db, "jobPortal");
+    const q = query(
+      jobPortalRef,
+      where("email", "==", email),
+      where("jobId", "==", jobId)
+    );
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      setJobApplicantData(doc.data());
+      if (Object.keys(doc.data()).length != 0) {
+        setIsJobAlreadyApplied(true);
+      } else {
+        setIsJobAlreadyApplied(false);
+      }
+    });
+
+    setIsLoading(false);
+  };
+  // console.log(alreadyAppliedJobData);
+  console.log(isLoading);
 
   const applyButtonHandler = () => {
     if (email.length == 0) {
@@ -50,7 +98,7 @@ function ListingSelected() {
     setresumeFile(event.target.files[0]);
   };
 
-  console.log(resumeFile);
+  // console.log(resumeFile);
   const submitButtonHandler = () => {
     if (!jobApplicantData.fullName) {
       setJobApplicationError((prevState) => ({
@@ -121,7 +169,7 @@ function ListingSelected() {
     ) {
       setIsLoading(true);
       // write document
-      const documentName = listingSelected.jobId + uid;
+      const documentName = jobId + uid;
       const jobPortalRef = collection(db, "jobPortal");
 
       const res = setDoc(doc(jobPortalRef, documentName), {
@@ -129,11 +177,11 @@ function ListingSelected() {
         age: jobApplicantData.age,
         qualification: jobApplicantData.qualification,
         experience: jobApplicantData.experience,
-        jobId: listingSelected.jobId,
+        jobId: jobId,
         email: email,
         date: todaysDate,
       }).then((resp) => {
-        console.log(resp);
+        // console.log(resp);
         const storageRef = ref(storage, resumeFile.name);
         const uploadTask = uploadBytesResumable(storageRef, resumeFile);
         uploadTask.on(
@@ -165,34 +213,76 @@ function ListingSelected() {
             });
             swal("Success", "Job Applied Successfully", "success");
             setIsLoading(false);
+            setShowApplicationForm(false);
           }
         );
       });
     }
   };
+
+  const saveButtonHandler = () => {
+    setIsLoading(true);
+    // write document
+    const documentName = jobId + uid;
+    const jobPortalRef = collection(db, "jobPortal");
+
+    const res = setDoc(doc(jobPortalRef, documentName), {
+      fullName: jobApplicantData.fullName,
+      age: jobApplicantData.age,
+      qualification: jobApplicantData.qualification,
+      experience: jobApplicantData.experience,
+      jobId: jobId,
+      email: email,
+      date: todaysDate,
+    }).then((resp) => {
+      // console.log(resp);
+      setIsLoading(false);
+      setShowApplicationForm(false);
+      swal("Success", "Application Updated Successfully", "success");
+    });
+  };
+
   return (
     <div className="listing-selected-div">
       <NavBarUser />
-
+      {isLoading && <LoadingBackdrop />}
       {/* selected listing details */}
       <Grid container justifyContent="center" className="listing-container">
         <Grid item xs={8} className="listing-grid-item">
-          <JobSelected />
-          <Button
-            onClick={applyButtonHandler}
-            variant="outlined"
-            color="success"
-            style={{
-              textTransform: "none",
-              width: "12.5rem",
-              borderColor: "#2bb792",
-              borderWidth: "2px",
-              backgroundColor: "#2bb792",
-              color: "white",
-            }}
-          >
-            Apply
-          </Button>
+          {listingSelected && <JobSelected />}
+          {isJobAlreadyApplied ? (
+            <Button
+              onClick={applyButtonHandler}
+              variant="outlined"
+              color="success"
+              style={{
+                textTransform: "none",
+                width: "12.5rem",
+                borderColor: "#2bb792",
+                borderWidth: "2px",
+                backgroundColor: "#2bb792",
+                color: "white",
+              }}
+            >
+              Edit
+            </Button>
+          ) : (
+            <Button
+              onClick={applyButtonHandler}
+              variant="outlined"
+              color="success"
+              style={{
+                textTransform: "none",
+                width: "12.5rem",
+                borderColor: "#2bb792",
+                borderWidth: "2px",
+                backgroundColor: "#2bb792",
+                color: "white",
+              }}
+            >
+              Apply
+            </Button>
+          )}
         </Grid>
       </Grid>
 
@@ -217,7 +307,7 @@ function ListingSelected() {
                   </TableRow>
                   <TableRow>
                     <TableCell className="listing-field-names">
-                      Full Name :
+                      Full Name* :
                     </TableCell>
 
                     <TableCell align="right">
@@ -230,6 +320,7 @@ function ListingSelected() {
                             ["fullName"]: event.target.value,
                           }))
                         }
+                        defaultValue={jobApplicantData.fullName}
                       />
                       {jobApplicationError.fullNameIsBlank && (
                         <p className="listing-selected-error">
@@ -240,7 +331,7 @@ function ListingSelected() {
                   </TableRow>
                   <TableRow>
                     <TableCell>
-                      <span className="listing-field-names">Age</span>(as of
+                      <span className="listing-field-names">Age* </span>(as of
                       01.01.2023) <span className="listing-field-names">:</span>
                     </TableCell>
                     <TableCell align="right" style={{ width: 100 }}>
@@ -253,6 +344,7 @@ function ListingSelected() {
                             ["age"]: event.target.value,
                           }))
                         }
+                        defaultValue={jobApplicantData.age}
                       />
                       {jobApplicationError.ageIsBlank && (
                         <p className="listing-selected-error">* Age is blank</p>
@@ -261,7 +353,7 @@ function ListingSelected() {
                   </TableRow>
                   <TableRow>
                     <TableCell className="listing-field-names">
-                      Qualification :
+                      Qualification* :
                     </TableCell>
                     <TableCell align="right">
                       <TextField
@@ -272,6 +364,7 @@ function ListingSelected() {
                             ["qualification"]: event.target.value,
                           }))
                         }
+                        defaultValue={jobApplicantData.qualification}
                       />
                       {jobApplicationError.qualificationIsBlank && (
                         <p className="listing-selected-error">
@@ -283,7 +376,7 @@ function ListingSelected() {
 
                   <TableRow>
                     <TableCell>
-                      <span className="listing-field-names">Experience </span>{" "}
+                      <span className="listing-field-names">Experience* </span>{" "}
                       (Number of years in the relevant field){" "}
                       <span className="listing-field-names">:</span>
                     </TableCell>
@@ -296,6 +389,7 @@ function ListingSelected() {
                             ["experience"]: event.target.value,
                           }))
                         }
+                        defaultValue={jobApplicantData.experience}
                       />
                       {jobApplicationError.experienceIsBlank && (
                         <p className="listing-selected-error">
@@ -307,42 +401,83 @@ function ListingSelected() {
                 </TableBody>
               </Table>
               <div className="listing-selected-button-div">
-                <Button
-                  variant="contained"
-                  component="label"
-                  className="listing-selected-button"
-                  style={{
-                    textTransform: "none",
-                  }}
-                >
-                  Resume :
-                  <input type="file" onChange={resumeUploadHandler} />
-                </Button>
+                {isJobAlreadyApplied ? (
+                  <div>
+                    <Link
+                      to={jobApplicantData.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        component="label"
+                        className="uploaded-resume"
+                        style={{
+                          textTransform: "none",
+                        }}
+                      >
+                        View Uploaded Resume
+                      </Button>
+                    </Link>
+                  </div>
+                ) : (
+                  <Button
+                    variant="contained"
+                    component="label"
+                    className="listing-selected-button"
+                    style={{
+                      textTransform: "none",
+                    }}
+                  >
+                    Resume :
+                    <input type="file" onChange={resumeUploadHandler} />
+                  </Button>
+                )}
+
                 {jobApplicationError.resumeIsBlank && (
                   <p className="listing-selected-error">
                     * Resume is not uploaded
                   </p>
                 )}
               </div>
-
-              <Button
-                onClick={submitButtonHandler}
-                variant="contained"
-                color="success"
-                className="listing-selected-submit-button"
-                style={{
-                  textTransform: "none",
-                  width: "12.5rem",
-                  borderColor: "#2bb792",
-                  borderWidth: "2px",
-                  backgroundColor: "#2bb792",
-                  color: "white",
-                }}
-              >
-                Submit
-              </Button>
+              {isJobAlreadyApplied ? (
+                <Button
+                  onClick={saveButtonHandler}
+                  variant="contained"
+                  color="success"
+                  className="listing-selected-submit-button"
+                  style={{
+                    textTransform: "none",
+                    width: "12.5rem",
+                    borderColor: "#2bb792",
+                    borderWidth: "2px",
+                    backgroundColor: "#2bb792",
+                    color: "white",
+                  }}
+                >
+                  Save
+                </Button>
+              ) : (
+                <Button
+                  onClick={submitButtonHandler}
+                  variant="contained"
+                  color="success"
+                  className="listing-selected-submit-button"
+                  style={{
+                    textTransform: "none",
+                    width: "12.5rem",
+                    borderColor: "#2bb792",
+                    borderWidth: "2px",
+                    backgroundColor: "#2bb792",
+                    color: "white",
+                  }}
+                >
+                  Submit
+                </Button>
+              )}
             </TableContainer>
-            {isLoading && <Loading />}
+            {/* {isLoading && <Loading />} */}
           </Grid>
         </Grid>
       )}
