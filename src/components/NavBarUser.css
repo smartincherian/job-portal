@@ -25,7 +25,9 @@
   padding-bottom: 5px;
 }
 
-.logo{cursor: pointer;}
+.logo {
+  cursor: pointer;
+}
 
 .dashboard-button {
   color: #8b1874;
@@ -37,4 +39,12 @@
 .navbaruser-sentence {
   color: #ffead2;
   font-weight: bolder;
+}
+
+.navbar-user-logo {
+  padding-top: 6%;
+}
+
+.navbar-user-backbutton {
+  padding-top: 0.5%;
 }

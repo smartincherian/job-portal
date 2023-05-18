@@ -46,13 +46,15 @@
 
 .homepage-login-box {
   border: 2px solid black;
-  padding: 10px;
+  /* padding: 10px; */
   border-radius: 10px;
   box-shadow: 3px 4px;
+  margin-left: 2% !important;
 }
 
 .homepage-fourth-container {
   margin-top: 0.5rem !important;
+  padding-bottom: 2% !important;
 }
 
 .users-jobs-font {
@@ -70,3 +72,7 @@
 .links {
   text-decoration: none;
 }
+
+/* .homepage-grid-last-item {
+  padding-bottom: 3rem;
+} */

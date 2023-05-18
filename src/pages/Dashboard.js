@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./Dashboard.css";
 import { NavBarUser } from "../components/NavBarUser";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,6 +21,9 @@ function Dashboard() {
   const [showJobSelected, setShowJobSelected] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedJobAppliedDate, setSelectedJobAppliedDate] = useState();
+  // const windowSize = useRef([window.innerWidth]);
+
+  // console.log(windowSize.current[0]);
 
   const fetchJobListings = async () => {
     axios.get("./joblistings.json").then((res) => {
@@ -33,6 +36,9 @@ function Dashboard() {
     //to prevent data lost after refresh
     fetchJobListings();
   }, [email]);
+
+  const isMobileView = window.innerWidth < 600;
+  console.log(isMobileView);
 
   const fetchJobsApplied = async () => {
     setIsLoading(true);
@@ -65,11 +71,13 @@ function Dashboard() {
     setIsLoading(false);
   };
   // console.log(jobsApplied);
+  console.log(window.innerWidth < 600);
   const columns = [
     {
       field: "title",
       headerName: "Title",
       flex: 1,
+      hide: true,
     },
     {
       field: "companyName",
@@ -125,14 +133,14 @@ function Dashboard() {
         alignItems="center"
         direction="row"
       >
-        <Grid item xs={8} className="dashboard-grid-item">
+        <Grid item md={8} xs={11} className="dashboard-grid-item">
           <h3>
             <span className="dashboard-selected-field">Email: </span>
             {email}
           </h3>
           <h4>Jobs applied:</h4>
           <Grid container justifyContent="center" alignItems="center">
-            <Grid item xs={10} className="dashboard-grid-item-2">
+            <Grid item xs={12} className="dashboard-grid-item-2">
               <DataGrid
                 rows={jobsApplied}
                 getRowId={(row) => row.jobId}
@@ -144,6 +152,11 @@ function Dashboard() {
                 showCellRightBorder
                 autoHeight
                 keepNonExistentRowsSelected
+                columnVisibilityModel={{
+                  // Hide columns
+                  title: !isMobileView,
+                  location: !isMobileView,
+                }}
                 slots={{
                   noRowsOverlay: () => (
                     <div className="dashboard-nodata-div">
@@ -168,7 +181,7 @@ function Dashboard() {
             justifyContent="center"
             className="dashboard-container-2"
           >
-            <Grid item xs={8} className="listing-grid-item">
+            <Grid item md={8} xs={11} className="listing-grid-item">
               <p
                 className="dashboard-close-button"
                 onClick={closeButtonHandler}

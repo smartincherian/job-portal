@@ -79,88 +79,88 @@ function Login() {
   return (
     <>
       {/* second container - right part  */}
-      <Grid item xs={4}>
-        <div>
-          <Grid
-            container
-            direction="column"
-            spacing={2}
-            className="homepage-login-box"
-          >
-            <Grid item>
-              <Typography className="jobseeker-login-font">
-                Jobseeker login
-              </Typography>
-              <TextField
-                onChange={(event) => {
-                  setEmail(event.target.value);
-                  setLoginFormError((prevState) => ({
-                    ...prevState,
-                    ["emailIsBlank"]: false,
-                  }));
-                }}
-                label="Email"
-                variant="outlined"
-                size="small"
-                InputLabelProps={{ style: { fontSize: 13 } }}
-                style={{
-                  width: "12.5rem",
-                }}
-              />
-              {loginFormError.emailIsBlank && (
-                <p className="login-error">* Email is blank</p>
-              )}
+      {/* <Grid item xs={11} md={4}> */}
+      <div>
+        <Grid
+          container
+          direction="column"
+          spacing={2}
+          className="homepage-login-box"
+        >
+          <Grid item>
+            <Typography className="jobseeker-login-font">
+              Jobseeker login
+            </Typography>
+            <TextField
+              onChange={(event) => {
+                setEmail(event.target.value);
+                setLoginFormError((prevState) => ({
+                  ...prevState,
+                  ["emailIsBlank"]: false,
+                }));
+              }}
+              label="Email"
+              variant="outlined"
+              size="small"
+              InputLabelProps={{ style: { fontSize: 13 } }}
+              style={{
+                width: "12.5rem",
+              }}
+            />
+            {loginFormError.emailIsBlank && (
+              <p className="login-error">* Email is blank</p>
+            )}
 
-              {loginFormError.emailIsInvalid && (
-                <p className="login-error">* Email is invalid</p>
-              )}
-            </Grid>
-            <Grid item>
-              <TextField
-                label="Password"
-                onChange={(event) => {
-                  setPassword(event.target.value);
-                  setLoginFormError((prevState) => ({
-                    ...prevState,
-                    ["passwordIsBlank"]: false,
-                  }));
-                }}
-                onKeyDown={enterKeyHandler}
-                variant="outlined"
-                type="password"
-                size="small"
-                InputLabelProps={{ style: { fontSize: 13 } }}
-                style={{
-                  width: "12.5rem",
-                }}
-              />
-              {loginFormError.passwordIsBlank && (
-                <p className="login-error">* Password is blank</p>
-              )}
-            </Grid>
-            <Grid item>
-              <Button
-                onClick={loginButtonHandler}
-                variant="outlined"
-                color="success"
-                style={{
-                  textTransform: "none",
-                  width: "12.5rem",
-                  borderColor: "#2bb792",
-                  borderWidth: "2px",
-                  backgroundColor: "#2bb792",
-                  color: "white",
-                  marginBottom: "2rem",
-                }}
-              >
-                Login →
-              </Button>
-
-              {isLoading && <Loading />}
-            </Grid>
+            {loginFormError.emailIsInvalid && (
+              <p className="login-error">* Email is invalid</p>
+            )}
           </Grid>
-        </div>
-      </Grid>
+          <Grid item>
+            <TextField
+              label="Password"
+              onChange={(event) => {
+                setPassword(event.target.value);
+                setLoginFormError((prevState) => ({
+                  ...prevState,
+                  ["passwordIsBlank"]: false,
+                }));
+              }}
+              onKeyDown={enterKeyHandler}
+              variant="outlined"
+              type="password"
+              size="small"
+              InputLabelProps={{ style: { fontSize: 13 } }}
+              style={{
+                width: "12.5rem",
+              }}
+            />
+            {loginFormError.passwordIsBlank && (
+              <p className="login-error">* Password is blank</p>
+            )}
+          </Grid>
+          <Grid item>
+            <Button
+              onClick={loginButtonHandler}
+              variant="outlined"
+              color="success"
+              style={{
+                textTransform: "none",
+                width: "12.5rem",
+                borderColor: "#2bb792",
+                borderWidth: "2px",
+                backgroundColor: "#2bb792",
+                color: "white",
+                marginBottom: "2rem",
+              }}
+            >
+               {isLoading ? <Loading />: 'Login →' } 
+            </Button>
+
+           
+          </Grid>
+        </Grid>
+      </div>
+      {/* </Grid> */}
     </>
   );
 }

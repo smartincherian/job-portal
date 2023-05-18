@@ -15,7 +15,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { reset, signin } from "../features/loggedInUserSlice";
 import logo from "../assets/images/logoNavbar.png";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { Button } from "@mui/material";
+import { Button, Grid } from "@mui/material";
+// import { makeStyles } from "@mui/styles";
+
+// const useStyles = makeStyles((theme) => ({
+//   title: {
+//     [theme.breakpoints.down("sm")]: {
+//       display: "none",
+//     },
+//   },
+// }));
 
 export function NavBarUser(props) {
   const dispatch = useDispatch();
@@ -24,6 +33,7 @@ export function NavBarUser(props) {
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const { email, uid } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  // const classes = useStyles();
 
   const handleMenu = () => {
     setviewUserDetails(!viewUserDetails);
@@ -48,7 +58,7 @@ export function NavBarUser(props) {
   };
 
   const homeHandler = () => {
-    navigate("/");
+    navigate("/listings");
   };
 
   const getLoggedInUser = () => {
@@ -81,86 +91,112 @@ export function NavBarUser(props) {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" style={{ background: "#4D5139" }}>
           <Toolbar variant="dense">
-            <Button
-              onClick={backButtonHandler}
-              style={{
-                color: "white",
-              }}
-            >
-              <ArrowBackIosIcon />
-            </Button>
-            <div>
-              <img
-                src={logo}
-                width="45"
-                height="35"
-                onClick={homeHandler}
-                className="logo"
-              ></img>
-            </div>
-            <Typography
-              variant="subtitle1"
-              component="div"
-              sx={{ flexGrow: 1 }}
-              className="navbaruser-sentence"
-            >
-              Welcome to 7th Pillar Jobs : Connecting talent with opportunity.
-            </Typography>
-            {userLoggedIn && (
-              <div>
-                <IconButton
-                  aria-label="loggedInUser"
-                  size="large"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleMenu}
-                  color="inherit"
+            <Grid container>
+              <Grid
+                item
+                xs={12}
+                md={1}
+                className="navbar-user-backbutton"
+                sx={{ display: { xs: "none" } }}
+              >
+                <Button
+                  onClick={backButtonHandler}
+                  style={{
+                    color: "white",
+                  }}
                 >
-                  <AccountCircle />
-                </IconButton>
-                {viewUserDetails && (
-                  <Menu
-                    sx={{ mt: "5vh" }}
-                    id="menu-appbar"
-                    anchorOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                    open={Boolean(viewUserDetails)}
-                    onClick={hideUserDetails}
-                  >
-                    {/* {console.log(email)} */}
+                  <ArrowBackIosIcon />
+                </Button>
+              </Grid>
+              <Grid item xs={12} md={1}>
+                <div className="navbar-user-logo">
+                  <img
+                    src={logo}
+                    width="45"
+                    height="35"
+                    onClick={homeHandler}
+                    className="logo"
+                  ></img>
+                </div>
+              </Grid>
+              <Grid item xs={10} md={9}>
+                <Typography
+                  variant="subtitle1"
+                  component="div"
+                  sx={{ flexGrow: 1 }}
+                  className="navbaruser-sentence"
+                >
+                  Welcome to 7th Pillar Jobs{" "}
+                  <Box sx={{ display: { xs: "none", sm: "inline-block" } }}>
+                    : Connecting talent with opportunity.
+                  </Box>
+                </Typography>
+              </Grid>
 
-                    <div className="user-details">
-                      <p>EmailId: {email}</p>
-                      <div className="navbar-dashboard">
-                        <p
-                          className="dashboard-button"
-                          onClick={dasbhboardHandler}
-                        >
-                          Dashboard
-                        </p>
+              <Grid item xs={2} md={1}>
+                {userLoggedIn && (
+                  <div>
+                    <IconButton
+                      aria-label="loggedInUser"
+                      size="large"
+                      aria-controls="menu-appbar"
+                      aria-haspopup="true"
+                      onClick={handleMenu}
+                      color="inherit"
+                    >
+                      <AccountCircle />
+                    </IconButton>
+                    {viewUserDetails && (
+                      <Menu
+                        sx={{ mt: "5vh" }}
+                        id="menu-appbar"
+                        anchorOrigin={{
+                          vertical: "top",
+                          horizontal: "right",
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                          vertical: "top",
+                          horizontal: "right",
+                        }}
+                        open={Boolean(viewUserDetails)}
+                        onClick={hideUserDetails}
+                      >
+                        {/* {console.log(email)} */}
 
-                        <p className="dashboard-button" onClick={homeHandler}>
-                          Home
-                        </p>
-                      </div>
-                      <div className="logout">
-                        {/* <Logout /> */}
-                        <p className="logout-button" onClick={logoutHandler}>
-                          Logout{" "}
-                        </p>
-                      </div>
-                    </div>
-                  </Menu>
+                        <div className="user-details">
+                          <p>EmailId: {email}</p>
+                          <div className="navbar-dashboard">
+                            <p
+                              className="dashboard-button"
+                              onClick={dasbhboardHandler}
+                            >
+                              Dashboard
+                            </p>
+
+                            <p
+                              className="dashboard-button"
+                              onClick={homeHandler}
+                            >
+                              Home
+                            </p>
+                          </div>
+                          <div className="logout">
+                            {/* <Logout /> */}
+                            <p
+                              className="logout-button"
+                              onClick={logoutHandler}
+                            >
+                              Logout{" "}
+                            </p>
+                          </div>
+                        </div>
+                      </Menu>
+                    )}
+                  </div>
                 )}
-              </div>
-            )}
+              </Grid>
+            </Grid>
           </Toolbar>
         </AppBar>
       </Box>

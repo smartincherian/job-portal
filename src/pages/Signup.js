@@ -95,7 +95,7 @@ function Signup() {
     >
       <NavBar />
       <Grid container alignItems="center" justifyContent="center">
-        <Grid item xs={3}>
+        <Grid item xs={9} md={3}>
           <Grid
             direction="column"
             container
@@ -108,7 +108,7 @@ function Signup() {
               </div>
             </Grid>
 
-            <Grid item xs={3}>
+            <Grid item xs={6} sm={3}>
               <TextField
                 label="Email"
                 variant="outlined"

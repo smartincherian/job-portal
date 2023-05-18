@@ -32,12 +32,12 @@ function ListingSelected() {
   const listingSelected = useSelector(
     (state) => state.listings.listingSelected
   );
-  // const { jobId } = listingSelected;
 
   const jobId = listingSelected ? listingSelected.jobId : console.log("error");
 
   console.log(jobId);
   const { email } = useSelector((state) => state.user);
+  console.log(email.length);
   const { uid } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const [showApplicationForm, setShowApplicationForm] = useState(false);
@@ -46,13 +46,12 @@ function ListingSelected() {
   const [resumeFile, setresumeFile] = useState("");
   const todaysDate = new Date();
   const [isLoading, setIsLoading] = useState(false);
-  // const [alreadyAppliedJobData, setAlreadyAppliedJobData] = useState({});
   const [isJobAlreadyApplied, setIsJobAlreadyApplied] = useState(null);
-  // console.log(todaysDate);
 
   useEffect(() => {
-    fetchJobsApplied();
-
+    if (email.length > 0) {
+      fetchJobsApplied();
+    }
     if (!listingSelected) {
       navigate("/listings");
     }
@@ -88,14 +87,43 @@ function ListingSelected() {
         "Not logged in",
         "Login is required. Please login and apply",
         "error"
-      ).then(navigate("/"));
+      ).then(() => navigate("/"));
     } else {
       setShowApplicationForm(true);
     }
   };
 
   const resumeUploadHandler = (event) => {
-    setresumeFile(event.target.files[0]);
+    if (event.target.files[0].type != "application/pdf") {
+      setJobApplicationError((prevState) => ({
+        ...prevState,
+        ["resumeFileInvalid"]: true,
+      }));
+      setresumeFile("");
+    } else {
+      setJobApplicationError((prevState) => ({
+        ...prevState,
+        ["resumeFileInvalid"]: false,
+      }));
+    }
+    if (event.target.files[0].size / (1024 * 1024) > 2) {
+      setJobApplicationError((prevState) => ({
+        ...prevState,
+        ["resumeFileOverSize"]: true,
+      }));
+      setresumeFile("");
+    } else {
+      setJobApplicationError((prevState) => ({
+        ...prevState,
+        ["resumeFileOverSize"]: false,
+      }));
+    }
+
+    if (
+      event.target.files[0].type == "application/pdf" &&
+      event.target.files[0].size / (1024 * 1024) <= 2
+    )
+      setresumeFile(event.target.files[0]);
   };
 
   // console.log(resumeFile);
@@ -165,7 +193,9 @@ function ListingSelected() {
       jobApplicantData.age &&
       jobApplicantData.qualification &&
       jobApplicantData.experience &&
-      resumeFile
+      resumeFile &&
+      !jobApplicantData.resumeFileInvalid &&
+      !jobApplicantData.resumeFileOverSize
     ) {
       setIsLoading(true);
       // write document
@@ -211,9 +241,11 @@ function ListingSelected() {
               });
               console.log("File available at", downloadURL);
             });
-            swal("Success", "Job Applied Successfully", "success");
             setIsLoading(false);
             setShowApplicationForm(false);
+            swal("Success", "Job Applied Successfully", "success").then(() =>
+              navigate("/dashboard")
+            );
           }
         );
       });
@@ -238,8 +270,14 @@ function ListingSelected() {
       // console.log(resp);
       setIsLoading(false);
       setShowApplicationForm(false);
-      swal("Success", "Application Updated Successfully", "success");
+      swal("Success", "Application Updated Successfully", "success").then(() =>
+        navigate("/dashboard")
+      );
     });
+  };
+
+  const closeButtonHandler = () => {
+    setShowApplicationForm(false);
   };
 
   return (
@@ -248,24 +286,30 @@ function ListingSelected() {
       {isLoading && <LoadingBackdrop />}
       {/* selected listing details */}
       <Grid container justifyContent="center" className="listing-container">
-        <Grid item xs={8} className="listing-grid-item">
+        <Grid item xs={12} md={8} className="listing-grid-item">
           {listingSelected && <JobSelected />}
           {isJobAlreadyApplied ? (
-            <Button
-              onClick={applyButtonHandler}
-              variant="outlined"
-              color="success"
-              style={{
-                textTransform: "none",
-                width: "12.5rem",
-                borderColor: "#2bb792",
-                borderWidth: "2px",
-                backgroundColor: "#2bb792",
-                color: "white",
-              }}
-            >
-              Edit
-            </Button>
+            <>
+              <h4 className="listing-selected-alert-message">
+                You have already applied for this job. If you want to edit the
+                same, please click below:
+              </h4>
+              <Button
+                onClick={applyButtonHandler}
+                variant="outlined"
+                color="success"
+                style={{
+                  textTransform: "none",
+                  width: "12.5rem",
+                  borderColor: "#2bb792",
+                  borderWidth: "2px",
+                  backgroundColor: "#2bb792",
+                  color: "white",
+                }}
+              >
+                Edit
+              </Button>
+            </>
           ) : (
             <Button
               onClick={applyButtonHandler}
@@ -293,9 +337,18 @@ function ListingSelected() {
           justifyContent="center"
           className="listing-selected-container-second"
         >
-          <Grid item xs={8} className="listing-grid-item">
+          <Grid item xs={11} md={8} className="listing-grid-item">
             <TableContainer component={Paper}>
-              <Table style={{ width: 450, margin: "auto" }}>
+              <p
+                className="listing-selected-close-button"
+                onClick={closeButtonHandler}
+              >
+                X
+              </p>
+              <h3 className="listing-grid-item-heading">
+                Details of the Job Applicant
+              </h3>
+              <Table sx={{ width: { md: 450 }, margin: "auto" }}>
                 <TableBody>
                   <TableRow>
                     <TableCell className="listing-field-names">
@@ -353,7 +406,7 @@ function ListingSelected() {
                   </TableRow>
                   <TableRow>
                     <TableCell className="listing-field-names">
-                      Qualification* :
+                      Qualification*:
                     </TableCell>
                     <TableCell align="right">
                       <TextField
@@ -377,7 +430,7 @@ function ListingSelected() {
                   <TableRow>
                     <TableCell>
                       <span className="listing-field-names">Experience* </span>{" "}
-                      (Number of years in the relevant field){" "}
+                      (Number of years in the relevant field)
                       <span className="listing-field-names">:</span>
                     </TableCell>
                     <TableCell align="right">
@@ -440,7 +493,20 @@ function ListingSelected() {
                     * Resume is not uploaded
                   </p>
                 )}
+
+                {jobApplicationError.resumeFileInvalid && (
+                  <p className="listing-selected-error">
+                    * Only .pdf files are supported
+                  </p>
+                )}
+
+                {jobApplicationError.resumeFileOverSize && (
+                  <p className="listing-selected-error">
+                    * Only files up to 2MB are supported
+                  </p>
+                )}
               </div>
+
               {isJobAlreadyApplied ? (
                 <Button
                   onClick={saveButtonHandler}

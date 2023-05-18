@@ -39,14 +39,15 @@ function Listings() {
         container
         spacing={0}
         alignItems="center"
-        justifyContent="flex-start"
+        justifyContent="center"
         className="listings-container"
         direction="row"
       >
         {listings.map((listing) => (
           <Grid
             item
-            xs={4.5}
+            xs={12}
+            md={4.5}
             className="listings-grid-item"
             key={listing.jobId}
           >

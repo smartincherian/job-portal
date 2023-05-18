@@ -1,7 +1,8 @@
 .listings-container {
-  /* margin-bottom: 2rem !important; */
-  padding-left: 5rem;
-  padding-bottom: 3rem !important;
+  margin-top: 3% !important;
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-bottom: 3% !important;
 }
 
 .listings-grid-item:hover {
@@ -9,16 +10,20 @@
 }
 
 .listings-grid-item {
-  margin: 3rem 0 0 3rem !important;
+  /* margin: 3rem 0 0 3rem !important; */
+  /* margin: 2vw !important; */
   transition: box-shadow 0.3s;
+  margin-bottom: 3% !important;
+  margin-right: 2% !important;
+  margin-left: 2% !important;
   /* width: 300px; */
-  height: 9rem;
+  height: 2% !important;
   border-radius: 10px;
   border: 1px solid #ccc;
   background: #fff;
   padding: 1rem;
   text-align: left;
-  padding-botttom: 3rem !important;
+  /* padding-botttom: 3rem !important; */
 }
 
 .listing-title {
