@@ -17,8 +17,10 @@ function Signup() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [signupFormError, setSignupFormError] = useState({});
+  const [signupFirebaseError, setSignupFirebaseError] = useState({});
 
   const signupButtonHandler = () => {
+    setSignupFirebaseError({});
     if (email.trim().length == 0) {
       setSignupFormError((prevState) => ({
         ...prevState,
@@ -44,21 +46,24 @@ function Signup() {
         ...prevState,
         ["passwordIsBlank"]: true,
       }));
+    } else if (password.trim().length < 6) {
+      setSignupFormError((prevState) => ({
+        ...prevState,
+        ["passwordIsShort"]: true,
+        ["passwordIsBlank"]: false,
+      }));
+    } else if (password != confirmPassword) {
+      setSignupFormError((prevState) => ({
+        ...prevState,
+        ["passwordsNotSame"]: true,
+        ["passwordIsShort"]: false,
+        ["passwordIsBlank"]: false,
+      }));
     } else {
       setSignupFormError((prevState) => ({
         ...prevState,
         ["passwordIsBlank"]: false,
-      }));
-    }
-
-    if (password != confirmPassword) {
-      setSignupFormError((prevState) => ({
-        ...prevState,
-        ["passwordsNotSame"]: true,
-      }));
-    } else {
-      setSignupFormError((prevState) => ({
-        ...prevState,
+        ["passwordIsShort"]: false,
         ["passwordsNotSame"]: false,
       }));
     }
@@ -66,7 +71,7 @@ function Signup() {
     if (
       email.trim().length != 0 &&
       regex.test(email) &&
-      password.trim().length != 0 &&
+      password.trim().length > 5 &&
       password == confirmPassword
     ) {
       setIsLoading(true);
@@ -80,7 +85,17 @@ function Signup() {
         })
         .catch((error) => {
           setIsLoading(false);
-          swal(error.code, error.message, "error");
+          console.log(error.code);
+          switch (error.code) {
+            case "auth/email-already-in-use":
+              setSignupFirebaseError({
+                ["emailAlreadyUsed"]: true,
+              });
+              break;
+
+            default:
+              swal(error.code, error.message, "error");
+          }
         });
     }
   };
@@ -129,6 +144,9 @@ function Signup() {
               {signupFormError.emailIsInvalid && (
                 <p className="login-error">* Email is invalid</p>
               )}
+              {signupFirebaseError.emailAlreadyUsed && (
+                <p className="login-error">Email id already is use</p>
+              )}
             </Grid>
 
             <Grid item xs={12}>
@@ -149,6 +167,12 @@ function Signup() {
               />
               {signupFormError.passwordIsBlank && (
                 <p className="login-error">* Password is blank</p>
+              )}
+
+              {signupFormError.passwordIsShort && (
+                <p className="login-error">
+                  Password should be at least 6 characters
+                </p>
               )}
             </Grid>
 

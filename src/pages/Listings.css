@@ -6,7 +6,11 @@
 }
 
 .listings-grid-item:hover {
-  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+  /* box-shadow: 0 0 11px rgba(33, 33, 33, 0.2); */
+  /* box-shadow: 5px -5px teal; */
+  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
 }
 
 .listings-grid-item {
@@ -17,8 +21,8 @@
   margin-right: 2% !important;
   margin-left: 2% !important;
   /* width: 300px; */
-  height: 2% !important;
-  border-radius: 10px;
+  /* height: 2% !important; */
+  border-radius: 20px !important;
   border: 1px solid #ccc;
   background: #fff;
   padding: 1rem;
@@ -28,7 +32,7 @@
 
 .listing-title {
   font-weight: bold;
-  font-size: x-large;
+  font-size: large;
 }
 
 .listing-location {
@@ -52,7 +56,8 @@
 
 .listing-title-font {
   font-weight: bold;
-  margin: 0.5rem 0 0 0;
+  margin: 0;
+  text-align: left;
 }
 
 .listing-location-font {
@@ -69,9 +74,39 @@
 
 .listings-grid-buttonbase {
   text-align: justify;
+  /* height: 100%; */
 }
 
 .listings-div {
   background-color: #6c9bcf;
   min-height: 100vh;
 }
+
+.listing-chip-applied {
+  font-size: 5px;
+}
+
+.listings-items-box {
+  height: 100%;
+  position: relative;
+}
+
+.listing-favorite {
+  float: right;
+  margin: 0;
+  /* position: absolute; */
+  /* /* top: 10px; */
+  right: 0.5rem;
+  bottom: 0.1rem;
+  cursor: pointer;
+}
+
+/* .listing-favorite :hover {
+  background-color: gold;
+} */
+
+.listing-favorite-icon :hover {
+  background-color: gold !important;
+}
+
+

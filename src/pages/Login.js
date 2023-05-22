@@ -17,8 +17,10 @@ function Login() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [loginFormError, setLoginFormError] = useState({});
+  const [loginFirebaseError, setLoginFirebaseError] = useState({});
 
   const loginButtonHandler = () => {
+    setLoginFirebaseError({});
     if (email.trim().length == 0) {
       setLoginFormError((prevState) => ({
         ...prevState,
@@ -65,7 +67,32 @@ function Login() {
         })
         .catch((error) => {
           setIsLoading(false);
-          swal(error.code, error.message, "error");
+          console.log(error.code);
+
+          switch (error.code) {
+            case "auth/user-not-found":
+              setLoginFirebaseError((prevState) => ({
+                ...prevState,
+                ["emailIsWrong"]: true,
+              }));
+              break;
+
+            case "auth/wrong-password":
+              setLoginFirebaseError((prevState) => ({
+                ...prevState,
+                ["passwordIsWrong"]: true,
+              }));
+              break;
+
+            case "auth/too-many-requests":
+              setLoginFirebaseError((prevState) => ({
+                ...prevState,
+                ["tooManyRequests"]: true,
+              }));
+              break;
+            default:
+              swal(error.code, error.message, "error");
+          }
         });
     }
   };
@@ -114,6 +141,9 @@ function Login() {
             {loginFormError.emailIsInvalid && (
               <p className="login-error">* Email is invalid</p>
             )}
+            {loginFirebaseError.emailIsWrong && (
+              <p className="login-error">User not found</p>
+            )}
           </Grid>
           <Grid item>
             <TextField
@@ -137,8 +167,15 @@ function Login() {
             {loginFormError.passwordIsBlank && (
               <p className="login-error">* Password is blank</p>
             )}
+
+            {loginFirebaseError.passwordIsWrong && (
+              <p className="login-error">Password is wrong</p>
+            )}
           </Grid>
           <Grid item>
+            {loginFirebaseError.tooManyRequests && (
+              <p className="login-error">Too many requests.</p>
+            )}
             <Button
               onClick={loginButtonHandler}
               variant="outlined"
@@ -153,10 +190,8 @@ function Login() {
                 marginBottom: "2rem",
               }}
             >
-               {isLoading ? <Loading />: 'Login →' } 
+              {isLoading ? <Loading /> : "Login →"}
             </Button>
-
-           
           </Grid>
         </Grid>
       </div>

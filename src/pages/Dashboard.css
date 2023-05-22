@@ -32,6 +32,10 @@
   padding-bottom: 2rem;
 }
 
+.dashboard-container {
+  padding-bottom: 2rem;
+}
+
 .dashboard-container-3 {
   /* padding-bottom: 3rem; */
 }
@@ -47,4 +51,36 @@
   justify-content: center;
   vertical-align: middle;
   font-weight: 600;
+}
+
+.dashboard-favorite-button {
+  padding: 0 !important;
+}
+
+.dashboard-work-button {
+  padding: 0 !important;
+}
+
+.dashboard-favorites-word {
+  display: inline-block;
+  font-size: 1rem;
+}
+
+.dashboard-heading {
+  color: #1cd6ce;
+  margin: 0;
+}
+
+.dashboard-work-word {
+  display: inline-block;
+  font-size: 1rem;
+}
+
+.listing-click-toapply {
+  color: #1cd6ce;
+}
+
+.listing-click-toapply :hover {
+  color: navy;
+  cursor: pointer;
 }

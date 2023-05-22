@@ -39,6 +39,9 @@
 .navbaruser-sentence {
   color: #ffead2;
   font-weight: bolder;
+  padding-top: 1%;
+  /* position: absolute;
+  left: 50%; */
 }
 
 .navbar-user-logo {
@@ -47,4 +50,16 @@
 
 .navbar-user-backbutton {
   padding-top: 0.5%;
+}
+
+.navbar-accounticon {
+  display: inline-block;
+}
+
+@media only screen and (max-width: 949px) {
+  .navbar-topcorner {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
 }

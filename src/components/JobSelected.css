@@ -1,6 +1,6 @@
 .job-selected-field {
   font-weight: 100;
-  font-size: medium;
+  font-size: 1rem;
   text-align: justify;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.5;
@@ -14,4 +14,29 @@
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.5;
   /* color: #1f8a70; */
+}
+
+.job-selected-title {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.job-selected-inside-div-font {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.job-selected-title {
+  margin: 0;
+}
+
+.job-selected-company-name {
+  margin-bottom: 0;
+  margin-top: 0.5rem;
+}
+
+.job-selected-location {
+  margin: 0.25rem 0 0 0;
+}
+
+.job-selected-type {
+  margin: 0.25rem 0 0 0;
 }

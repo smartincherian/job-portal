@@ -9,9 +9,10 @@
   border: 1px solid #ccc;
   background: #fff;
   transition: box-shadow 0.3s;
-  border-radius: 5px;
+  border-radius: 20px;
   text-align: left;
   padding: 1rem;
+  /* height: 100%; */
 }
 
 .listing-selected-list {
@@ -76,4 +77,11 @@
 .listing-grid-item-heading {
   text-align: center !important;
   color: #03c988;
+}
+
+.job-selected-inside-div {
+  background-color: #f7f7f9;
+  border-radius: 20px;
+  padding: 0.1rem 1rem;
+  margin: 1rem 0;
 }

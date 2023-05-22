@@ -145,10 +145,16 @@ function ListingSelected() {
         ...prevState,
         ["ageIsBlank"]: true,
       }));
+    } else if (jobApplicantData.age < 18) {
+      setJobApplicationError((prevState) => ({
+        ...prevState,
+        ["ageIsInvalid"]: true,
+      }));
     } else {
       setJobApplicationError((prevState) => ({
         ...prevState,
         ["ageIsBlank"]: false,
+        ["ageIsInvalid"]: false,
       }));
     }
 
@@ -168,6 +174,11 @@ function ListingSelected() {
       setJobApplicationError((prevState) => ({
         ...prevState,
         ["experienceIsBlank"]: true,
+      }));
+    } else if (jobApplicantData.experience < 0) {
+      setJobApplicationError((prevState) => ({
+        ...prevState,
+        ["experienceIsInvalid"]: true,
       }));
     } else {
       setJobApplicationError((prevState) => ({
@@ -191,11 +202,13 @@ function ListingSelected() {
     if (
       jobApplicantData.fullName &&
       jobApplicantData.age &&
+      jobApplicantData.age > 17 &&
       jobApplicantData.qualification &&
       jobApplicantData.experience &&
+      jobApplicantData.experience > 0 &&
       resumeFile &&
-      !jobApplicantData.resumeFileInvalid &&
-      !jobApplicantData.resumeFileOverSize
+      !jobApplicationError.resumeFileInvalid &&
+      !jobApplicationError.resumeFileOverSize
     ) {
       setIsLoading(true);
       // write document
@@ -253,27 +266,90 @@ function ListingSelected() {
   };
 
   const saveButtonHandler = () => {
-    setIsLoading(true);
-    // write document
-    const documentName = jobId + uid;
-    const jobPortalRef = collection(db, "jobPortal");
+    if (!jobApplicantData.fullName) {
+      setJobApplicationError((prevState) => ({
+        ...prevState,
+        ["fullNameIsBlank"]: true,
+      }));
+    } else {
+      setJobApplicationError((prevState) => ({
+        ...prevState,
+        ["fullNameIsBlank"]: false,
+      }));
+    }
 
-    const res = setDoc(doc(jobPortalRef, documentName), {
-      fullName: jobApplicantData.fullName,
-      age: jobApplicantData.age,
-      qualification: jobApplicantData.qualification,
-      experience: jobApplicantData.experience,
-      jobId: jobId,
-      email: email,
-      date: todaysDate,
-    }).then((resp) => {
-      // console.log(resp);
-      setIsLoading(false);
-      setShowApplicationForm(false);
-      swal("Success", "Application Updated Successfully", "success").then(() =>
-        navigate("/dashboard")
-      );
-    });
+    if (!jobApplicantData.age) {
+      setJobApplicationError((prevState) => ({
+        ...prevState,
+        ["ageIsBlank"]: true,
+      }));
+    } else if (jobApplicantData.age < 18) {
+      setJobApplicationError((prevState) => ({
+        ...prevState,
+        ["ageIsInvalid"]: true,
+      }));
+    } else {
+      setJobApplicationError((prevState) => ({
+        ...prevState,
+        ["ageIsBlank"]: false,
+        ["ageIsInvalid"]: false,
+      }));
+    }
+
+    if (!jobApplicantData.qualification) {
+      setJobApplicationError((prevState) => ({
+        ...prevState,
+        ["qualificationIsBlank"]: true,
+      }));
+    } else {
+      setJobApplicationError((prevState) => ({
+        ...prevState,
+        ["qualificationIsBlank"]: false,
+      }));
+    }
+
+    if (!jobApplicantData.experience) {
+      setJobApplicationError((prevState) => ({
+        ...prevState,
+        ["experienceIsBlank"]: true,
+      }));
+    } else {
+      setJobApplicationError((prevState) => ({
+        ...prevState,
+        ["experienceIsBlank"]: false,
+      }));
+    }
+
+    if (
+      jobApplicantData.fullName &&
+      jobApplicantData.age &&
+      jobApplicantData.age > 17 &&
+      jobApplicantData.qualification &&
+      jobApplicantData.experience &&
+      jobApplicantData.experience > 0
+    ) {
+      setIsLoading(true);
+      // write document
+      const documentName = jobId + uid;
+      const jobPortalRef = collection(db, "jobPortal");
+
+      const res = setDoc(doc(jobPortalRef, documentName), {
+        fullName: jobApplicantData.fullName,
+        age: jobApplicantData.age,
+        qualification: jobApplicantData.qualification,
+        experience: jobApplicantData.experience,
+        jobId: jobId,
+        email: email,
+        date: todaysDate,
+      }).then((resp) => {
+        // console.log(resp);
+        setIsLoading(false);
+        setShowApplicationForm(false);
+        swal("Success", "Application Updated Successfully", "success").then(
+          () => navigate("/dashboard")
+        );
+      });
+    }
   };
 
   const closeButtonHandler = () => {
@@ -367,12 +443,16 @@ function ListingSelected() {
                       <TextField
                         variant="standard"
                         id="margin-none"
-                        onChange={(event) =>
+                        onChange={(event) => {
                           setJobApplicantData((prevState) => ({
                             ...prevState,
                             ["fullName"]: event.target.value,
-                          }))
-                        }
+                          }));
+                          setJobApplicationError((prevState) => ({
+                            ...prevState,
+                            ["fullNameIsBlank"]: false,
+                          }));
+                        }}
                         defaultValue={jobApplicantData.fullName}
                       />
                       {jobApplicationError.fullNameIsBlank && (
@@ -391,16 +471,28 @@ function ListingSelected() {
                       <TextField
                         inputProps={{ type: "number", maxLength: 14 }}
                         type="number"
-                        onChange={(event) =>
+                        InputProps={{
+                          inputProps: { min: 18 },
+                        }}
+                        onChange={(event) => {
                           setJobApplicantData((prevState) => ({
                             ...prevState,
                             ["age"]: event.target.value,
-                          }))
-                        }
+                          }));
+                          setJobApplicationError((prevState) => ({
+                            ...prevState,
+                            ["ageIsBlank"]: false,
+                          }));
+                        }}
                         defaultValue={jobApplicantData.age}
                       />
                       {jobApplicationError.ageIsBlank && (
                         <p className="listing-selected-error">* Age is blank</p>
+                      )}
+                      {jobApplicationError.ageIsInvalid && (
+                        <p className="listing-selected-error">
+                          * Minimum Age is 18
+                        </p>
                       )}
                     </TableCell>
                   </TableRow>
@@ -411,12 +503,16 @@ function ListingSelected() {
                     <TableCell align="right">
                       <TextField
                         variant="standard"
-                        onChange={(event) =>
+                        onChange={(event) => {
                           setJobApplicantData((prevState) => ({
                             ...prevState,
                             ["qualification"]: event.target.value,
-                          }))
-                        }
+                          }));
+                          setJobApplicationError((prevState) => ({
+                            ...prevState,
+                            ["qualificationIsBlank"]: false,
+                          }));
+                        }}
                         defaultValue={jobApplicantData.qualification}
                       />
                       {jobApplicationError.qualificationIsBlank && (
@@ -435,18 +531,31 @@ function ListingSelected() {
                     </TableCell>
                     <TableCell align="right">
                       <TextField
+                        value={jobApplicantData.experience}
                         type="number"
-                        onChange={(event) =>
+                        InputProps={{
+                          inputProps: { min: 0 },
+                        }}
+                        onChange={(event) => {
+                          setJobApplicationError((prevState) => ({
+                            ...prevState,
+                            ["experienceIsBlank"]: false,
+                          }));
                           setJobApplicantData((prevState) => ({
                             ...prevState,
                             ["experience"]: event.target.value,
-                          }))
-                        }
+                          }));
+                        }}
                         defaultValue={jobApplicantData.experience}
                       />
                       {jobApplicationError.experienceIsBlank && (
                         <p className="listing-selected-error">
                           * Experience is blank
+                        </p>
+                      )}
+                      {jobApplicationError.experienceIsInvalid && (
+                        <p className="listing-selected-error">
+                          * Enter valid experience
                         </p>
                       )}
                     </TableCell>

@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { searchKeyword: "" };
+const initialState = { searchResult: [] };
 
 const searchSlice = createSlice({
     name: "jobSearch",
     initialState,
     reducers: {
         jobSearch: (state, action) => {
-            state.searchKeyword = action.payload;
+            state.searchResult = action.payload;
         }
     }
 });

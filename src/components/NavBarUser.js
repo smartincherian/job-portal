@@ -89,7 +89,7 @@ export function NavBarUser(props) {
     <div className="navbaruser-div">
       <span className="helpMe">All Glory to God</span>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" style={{ background: "#4D5139" }}>
+        <AppBar position="static" style={{ background: "#025464" }}>
           <Toolbar variant="dense">
             <Grid container>
               <Grid
@@ -97,7 +97,7 @@ export function NavBarUser(props) {
                 xs={12}
                 md={1}
                 className="navbar-user-backbutton"
-                sx={{ display: { xs: "none" } }}
+                sx={{ display: { xs: "none", md: "inline-block" } }}
               >
                 <Button
                   onClick={backButtonHandler}
@@ -119,7 +119,7 @@ export function NavBarUser(props) {
                   ></img>
                 </div>
               </Grid>
-              <Grid item xs={10} md={9}>
+              <Grid item xs={12} md={9}>
                 <Typography
                   variant="subtitle1"
                   component="div"
@@ -127,13 +127,13 @@ export function NavBarUser(props) {
                   className="navbaruser-sentence"
                 >
                   Welcome to 7th Pillar Jobs{" "}
-                  <Box sx={{ display: { xs: "none", sm: "inline-block" } }}>
+                  <Box sx={{ display: { xs: "none", md: "inline-block" } }}>
                     : Connecting talent with opportunity.
                   </Box>
                 </Typography>
               </Grid>
 
-              <Grid item xs={2} md={1}>
+              <Grid item xs={2} md={1} className="navbar-topcorner">
                 {userLoggedIn && (
                   <div>
                     <IconButton
@@ -162,8 +162,6 @@ export function NavBarUser(props) {
                         open={Boolean(viewUserDetails)}
                         onClick={hideUserDetails}
                       >
-                        {/* {console.log(email)} */}
-
                         <div className="user-details">
                           <p>EmailId: {email}</p>
                           <div className="navbar-dashboard">
@@ -182,7 +180,6 @@ export function NavBarUser(props) {
                             </p>
                           </div>
                           <div className="logout">
-                            {/* <Logout /> */}
                             <p
                               className="logout-button"
                               onClick={logoutHandler}
