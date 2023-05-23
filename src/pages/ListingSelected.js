@@ -356,6 +356,8 @@ function ListingSelected() {
     setShowApplicationForm(false);
   };
 
+  console.log(jobApplicantData);
+
   return (
     <div className="listing-selected-div">
       <NavBarUser />
@@ -370,6 +372,26 @@ function ListingSelected() {
                 You have already applied for this job. If you want to edit the
                 same, please click below:
               </h4>
+              <div className="listing-selected-button-div">
+                <Button
+                  onClick={applyButtonHandler}
+                  variant="outlined"
+                  color="success"
+                  style={{
+                    textTransform: "none",
+                    width: "12.5rem",
+                    borderColor: "#2bb792",
+                    borderWidth: "2px",
+                    backgroundColor: "#2bb792",
+                    color: "white",
+                  }}
+                >
+                  Edit
+                </Button>
+              </div>
+            </>
+          ) : (
+            <div className="listing-selected-button-div">
               <Button
                 onClick={applyButtonHandler}
                 variant="outlined"
@@ -383,25 +405,9 @@ function ListingSelected() {
                   color: "white",
                 }}
               >
-                Edit
+                Apply
               </Button>
-            </>
-          ) : (
-            <Button
-              onClick={applyButtonHandler}
-              variant="outlined"
-              color="success"
-              style={{
-                textTransform: "none",
-                width: "12.5rem",
-                borderColor: "#2bb792",
-                borderWidth: "2px",
-                backgroundColor: "#2bb792",
-                color: "white",
-              }}
-            >
-              Apply
-            </Button>
+            </div>
           )}
         </Grid>
       </Grid>
@@ -414,7 +420,7 @@ function ListingSelected() {
           className="listing-selected-container-second"
         >
           <Grid item xs={11} md={8} className="listing-grid-item">
-            <TableContainer component={Paper}>
+            <TableContainer>
               <p
                 className="listing-selected-close-button"
                 onClick={closeButtonHandler}
@@ -562,9 +568,9 @@ function ListingSelected() {
                   </TableRow>
                 </TableBody>
               </Table>
-              <div className="listing-selected-button-div">
+              <div className="listing-selected-resume-div">
                 {isJobAlreadyApplied ? (
-                  <div>
+                  <div className="listing-selected-resume-div">
                     <Link
                       to={jobApplicantData.url}
                       target="_blank"
@@ -584,17 +590,19 @@ function ListingSelected() {
                     </Link>
                   </div>
                 ) : (
-                  <Button
-                    variant="contained"
-                    component="label"
-                    className="listing-selected-button"
-                    style={{
-                      textTransform: "none",
-                    }}
-                  >
-                    Resume :
-                    <input type="file" onChange={resumeUploadHandler} />
-                  </Button>
+                  <div listing-selected-resume-div>
+                    <Button
+                      variant="contained"
+                      component="label"
+                      className="listing-selected-button"
+                      style={{
+                        textTransform: "none",
+                      }}
+                    >
+                      Resume :
+                      <input type="file" onChange={resumeUploadHandler} />
+                    </Button>
+                  </div>
                 )}
 
                 {jobApplicationError.resumeIsBlank && (
@@ -617,39 +625,43 @@ function ListingSelected() {
               </div>
 
               {isJobAlreadyApplied ? (
-                <Button
-                  onClick={saveButtonHandler}
-                  variant="contained"
-                  color="success"
-                  className="listing-selected-submit-button"
-                  style={{
-                    textTransform: "none",
-                    width: "12.5rem",
-                    borderColor: "#2bb792",
-                    borderWidth: "2px",
-                    backgroundColor: "#2bb792",
-                    color: "white",
-                  }}
-                >
-                  Save
-                </Button>
+                <div className="listing-selected-button-div">
+                  <Button
+                    onClick={saveButtonHandler}
+                    variant="contained"
+                    color="success"
+                    className="listing-selected-submit-button"
+                    style={{
+                      textTransform: "none",
+                      width: "12.5rem",
+                      borderColor: "#2bb792",
+                      borderWidth: "2px",
+                      backgroundColor: "#2bb792",
+                      color: "white",
+                    }}
+                  >
+                    Save
+                  </Button>
+                </div>
               ) : (
-                <Button
-                  onClick={submitButtonHandler}
-                  variant="contained"
-                  color="success"
-                  className="listing-selected-submit-button"
-                  style={{
-                    textTransform: "none",
-                    width: "12.5rem",
-                    borderColor: "#2bb792",
-                    borderWidth: "2px",
-                    backgroundColor: "#2bb792",
-                    color: "white",
-                  }}
-                >
-                  Submit
-                </Button>
+                <div className="listing-selected-button-div">
+                  <Button
+                    onClick={submitButtonHandler}
+                    variant="contained"
+                    color="success"
+                    className="listing-selected-submit-button"
+                    style={{
+                      textTransform: "none",
+                      width: "12.5rem",
+                      borderColor: "#2bb792",
+                      borderWidth: "2px",
+                      backgroundColor: "#2bb792",
+                      color: "white",
+                    }}
+                  >
+                    Submit
+                  </Button>
+                </div>
               )}
             </TableContainer>
             {/* {isLoading && <Loading />} */}

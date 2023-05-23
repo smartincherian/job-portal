@@ -166,22 +166,32 @@ function Dashboard() {
 
     let jobsFavoriteData = [];
     const docSnapshot = await getDoc(jobPortalExistingFavoritesRef);
-    if (docSnapshot.data().favorite.constructor === Array) {
-      jobsFavoriteData = docSnapshot.data().favorite;
+
+    try {
+      if (docSnapshot.data().favorite.constructor === Array) {
+        jobsFavoriteData = docSnapshot.data().favorite;
+  
+        let filteredListings = [];
+        jobsFavoriteData.map((item) => {
+          listings.map((listing) => {
+            if (item == listing.jobId) {
+              filteredListings.push(listing);
+            }
+          });
+        });
+  
+        setJobsFavorite(filteredListings);
+  
+        setIsLoading(false);
+      
+      }
     }
-
-    let filteredListings = [];
-    jobsFavoriteData.map((item) => {
-      listings.map((listing) => {
-        if (item == listing.jobId) {
-          filteredListings.push(listing);
-        }
-      });
-    });
-
-    setJobsFavorite(filteredListings);
-
-    setIsLoading(false);
+    catch (error) {
+      setIsLoading(false);
+      console.log(error)
+    }
+   
+    
   };
 
   console.log(favoritesArray);

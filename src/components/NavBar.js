@@ -10,7 +10,7 @@ export function NavBar(props) {
     <div className="navbar-div">
       <span className="helpMe">All Glory to God</span>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" style={{ background: "#4D5139" }}>
+        <AppBar position="static" style={{ background: "#025464" }}>
           <Toolbar variant="dense">
             <Typography
               variant="subtitle1"

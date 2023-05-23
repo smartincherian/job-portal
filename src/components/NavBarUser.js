@@ -61,6 +61,10 @@ export function NavBarUser(props) {
     navigate("/listings");
   };
 
+  const logoHandler = () => {
+    navigate("/");
+  }
+
   const getLoggedInUser = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -114,7 +118,7 @@ export function NavBarUser(props) {
                     src={logo}
                     width="45"
                     height="35"
-                    onClick={homeHandler}
+                    onClick={logoHandler}
                     className="logo"
                   ></img>
                 </div>

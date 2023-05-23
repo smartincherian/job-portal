@@ -58,6 +58,7 @@
   font-weight: bold;
   margin: 0;
   text-align: left;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .listing-location-font {
@@ -75,6 +76,8 @@
 .listings-grid-buttonbase {
   text-align: justify;
   /* height: 100%; */
+  /* font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.5; */
 }
 
 .listings-div {
@@ -84,6 +87,7 @@
 
 .listing-chip-applied {
   font-size: 5px;
+  
 }
 
 .listings-items-box {
@@ -108,5 +112,3 @@
 .listing-favorite-icon :hover {
   background-color: gold !important;
 }
-
-

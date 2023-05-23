@@ -220,11 +220,11 @@ function Listings() {
                     size="small"
                     sx={{
                       fontSize: "0.8125rem",
-                      backgroundColor: "#5BA4A4",
-                      fontFamily: "Spartan",
+                      backgroundColor: "#78cfcf",
+                      fontFamily: "Segoe UI",
                       fontWeight: 700,
-                      lineHeight: 1.5,
-                      color: "white",
+                      color: "#14332c",
+                      marginTop: "0.75rem",
                     }}
                   />
                 )}

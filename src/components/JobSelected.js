@@ -26,23 +26,23 @@ function JobSelected() {
         {listingSelected.type}
       </h4>
       <div className="job-selected-inside-div">
-        <h4 className="job-selected-text job-selected-inside-div-font">
+        <p className="job-selected-text job-selected-inside-div-font">
           <span className="job-selected-field">Brief Description: </span>
           {listingSelected.briefDescription}
-        </h4>
-        <h4 className="job-selected-text job-selected-inside-div-font">
+        </p>
+        <p className="job-selected-text job-selected-inside-div-font">
           <span className="job-selected-field">Requirements : </span>
           <div className="listing-selected-list">
             {listingSelected.requirements.map((element, array) => (
               <li key={element}>{element}</li>
             ))}
           </div>
-        </h4>
+        </p>
 
-        <h4 className="job-selected-text job-selected-inside-div-font">
+        <p className="job-selected-text job-selected-inside-div-font">
           <span className="job-selected-field">Qualifications Required: </span>
           {listingSelected.qualifications}
-        </h4>
+        </p>
       </div>
     </div>
   );
