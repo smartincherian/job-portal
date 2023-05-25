@@ -100,8 +100,8 @@ export function NavBarUser(props) {
                 item
                 xs={12}
                 md={1}
-                className="navbar-user-backbutton"
-                sx={{ display: { xs: "none", md: "inline-block" } }}
+                className="navbar-user-backbutton navbar-topleftcorner"
+                // sx={{ display: { xs: "none", md: "inline-block" } }}
               >
                 <Button
                   onClick={backButtonHandler}

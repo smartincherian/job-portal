@@ -188,6 +188,8 @@ function Login() {
                 backgroundColor: "#2bb792",
                 color: "white",
                 marginBottom: "2rem",
+                fontFamily: "Segoe UI",
+                fontWeight: 600,
               }}
             >
               {isLoading ? <Loading /> : "Login →"}

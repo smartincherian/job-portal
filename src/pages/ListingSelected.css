@@ -9,20 +9,31 @@
   border: 1px solid #ccc;
   background: #fff;
   transition: box-shadow 0.3s;
-  border-radius: 20px;
+  border-radius: 9px;
   text-align: left;
   padding: 1rem;
   /* height: 100%; */
 }
 
-.listing-selected-list {
-  margin-left: 3rem;
+.listing-grid-modal:hover {
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
 }
 
-.listing-selected-error {
-  color: #b04759;
-  margin: 0;
-  font-size: small;
+.listing-grid-modal {
+  /* margin-bottom: 5% !important; */
+  margin: 5% 2% !important;
+  border: 1px solid #ccc;
+  background: #fff;
+  transition: box-shadow 0.3s;
+  border-radius: 9px;
+  text-align: center;
+  padding: 0.5rem;
+  /* height: 100%; */
+  margin-top: 3%;
+}
+
+.listing-selected-list {
+  margin-left: 3rem;
 }
 
 .listing-selected-button {
@@ -31,8 +42,6 @@
   margin-top: 1rem !important;
   width: 40vh;
 }
-
-
 
 .listing-selected-submit-button {
   margin-top: 3rem !important;
@@ -61,7 +70,8 @@
 .listing-selected-alert-message {
   font-style: italic;
   /* background-color: #b04759; */
-  color: #1cd6ce;
+  color: #2bb792;
+
   margin-bottom: 1.5%;
 }
 
@@ -79,9 +89,11 @@
 
 .job-selected-inside-div {
   background-color: #f7f7f9;
-  border-radius: 20px;
+  border-radius: 9px;
   padding: 0.1rem 1rem;
   margin: 1rem 0;
+  color: #595959;
+  font-weight: 640;
 }
 
 .listing-selected-button-div {

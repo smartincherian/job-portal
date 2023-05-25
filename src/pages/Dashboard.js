@@ -13,16 +13,15 @@ import {
   getDoc,
 } from "firebase/firestore";
 import { DataGrid } from "@mui/x-data-grid";
-import SavedSearchSharpIcon from "@mui/icons-material/SavedSearchSharp";
 import { jobListingSelected, jobListings } from "../features/jobListingsSlice";
-import JobSelected from "../components/JobSelected";
+import JobSelected from "../components/ListingSelected/JobSelected";
 import LinearProgress from "@mui/material/LinearProgress";
 import axios from "axios";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import RemoveRedEyeSharpIcon from "@mui/icons-material/RemoveRedEyeSharp";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import WorkIcon from "@mui/icons-material/Work";
 import { useNavigate } from "react-router-dom";
+import ListingSelected from "./ListingSelected";
 
 function Dashboard() {
   const { email } = useSelector((state) => state.user);
@@ -32,6 +31,7 @@ function Dashboard() {
   const [jobsApplicationData, setJobsApplicationData] = useState([]);
   const dispatch = useDispatch();
   const [showJobSelected, setShowJobSelected] = useState(false);
+  const [showListingSelected, setShowListingSelected] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedJobAppliedDate, setSelectedJobAppliedDate] = useState();
   const [showFavorites, setShowFavorites] = useState(false);
@@ -39,6 +39,8 @@ function Dashboard() {
   const [favoritesArray, setFavoritesArray] = useState([]);
   const [favoriteSelectedJobId, setFavoriteSelectedJobId] = useState("");
   const navigate = useNavigate();
+  const ref = useRef(null);
+  const topRef = useRef(null);
   // const windowSize = useRef([window.innerWidth]);
 
   // console.log(windowSize.current[0]);
@@ -56,13 +58,13 @@ function Dashboard() {
   }, [email]);
 
   const isMobileView = window.innerWidth < 600;
-  console.log(isMobileView);
+  // console.log(showJobSelected);
 
   const fetchJobsApplied = async () => {
     setIsLoading(true);
     // get firebase document
     const jobPortalRef = collection(db, "jobPortal");
-    console.log(email);
+    // console.log(email);
     const q = query(jobPortalRef, where("email", "==", email));
     const querySnapshot = await getDocs(q);
 
@@ -89,7 +91,7 @@ function Dashboard() {
     setIsLoading(false);
   };
   // console.log(jobsApplied);
-  console.log(window.innerWidth < 600);
+  // console.log(window.innerWidth < 600);
   const columns = [
     {
       field: "title",
@@ -130,7 +132,6 @@ function Dashboard() {
 
   const viewMoreClickHandler = (row) => {
     dispatch(jobListingSelected(row.row));
-
     if (showJobsApplied) {
       jobsApplicationData.map((job) => {
         if (row.row.jobId == job.jobId) {
@@ -144,16 +145,24 @@ function Dashboard() {
       setFavoriteSelectedJobId(row.row.jobId);
     }
 
-    setShowJobSelected(true);
+    // setShowJobSelected(true);
+    setShowListingSelected(true);
+    scrollDown();
+  };
+  console.log(topRef.current);
+  const scrollDown = () => {
+    ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  console.log(favoriteSelectedJobId);
+  // console.log(favoriteSelectedJobId);
   // console.log(selectedJobAppliedDate);
 
   const closeButtonHandler = () => {
-    setShowJobSelected(false);
+    setShowListingSelected(false);
+    // topRef.current?.scrollIntoView({ behavior: "smooth" });
+    window.scrollTo(0, 0);
   };
-
+  // console.log(showJobSelected);
   const handleCellClick = (param, event) => {
     event.defaultMuiPrevented = param.field === "view";
   };
@@ -170,7 +179,7 @@ function Dashboard() {
     try {
       if (docSnapshot.data().favorite.constructor === Array) {
         jobsFavoriteData = docSnapshot.data().favorite;
-  
+
         let filteredListings = [];
         jobsFavoriteData.map((item) => {
           listings.map((listing) => {
@@ -179,22 +188,18 @@ function Dashboard() {
             }
           });
         });
-  
+
         setJobsFavorite(filteredListings);
-  
+
         setIsLoading(false);
-      
       }
-    }
-    catch (error) {
+    } catch (error) {
       setIsLoading(false);
-      console.log(error)
+      console.log(error);
     }
-   
-    
   };
 
-  console.log(favoritesArray);
+  // console.log(favoritesArray);
 
   const jobsAppliedButtonHandler = () => {
     setShowFavorites(false);
@@ -206,7 +211,7 @@ function Dashboard() {
   };
 
   return (
-    <div className="dashboard">
+    <div className="dashboard" ref={topRef}>
       <NavBarUser />
       <Grid
         container
@@ -223,7 +228,7 @@ function Dashboard() {
                 {email}
               </h3>
             </Grid>
-            <Grid item md={3} xs={11}>
+            <Grid item md={3} xs={11} className="dashboard-icon">
               {showJobsApplied ? (
                 <IconButton
                   // sx={{ "& :hover": { color: "gold" } }}
@@ -330,7 +335,7 @@ function Dashboard() {
         </Grid>
       </Grid>
 
-      {showJobSelected && (
+      {/* {showJobSelected && (
         <>
           <Grid
             container
@@ -345,7 +350,6 @@ function Dashboard() {
                 X
               </p>
               <JobSelected />
-              {/* data from firebase */}
 
               {showJobsApplied && (
                 <h4>
@@ -367,7 +371,13 @@ function Dashboard() {
             </Grid>
           </Grid>
         </>
-      )}
+      )} */}
+
+      <div ref={ref}>
+        {showListingSelected && (
+          <ListingSelected hideNavbar={true} onClose={closeButtonHandler} />
+        )}
+      </div>
     </div>
   );
 }

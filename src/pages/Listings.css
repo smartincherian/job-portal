@@ -10,7 +10,7 @@
   /* box-shadow: 5px -5px teal; */
   box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
     0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
+  border-radius: 9px;
 }
 
 .listings-grid-item {
@@ -22,7 +22,7 @@
   margin-left: 2% !important;
   /* width: 300px; */
   /* height: 2% !important; */
-  border-radius: 20px !important;
+  border-radius: 9px !important;
   border: 1px solid #ccc;
   background: #fff;
   padding: 1rem;
@@ -37,21 +37,28 @@
 
 .listing-location {
   /* background-color: #f1f6f9; */
-  font-weight: 100;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: small;
+  margin: 0.5rem 0 0 0;
+  text-align: right;
 }
 
 .listing-briefdescription {
-  color: navy;
+  color: #595959;
+  font-weight: 700;
   /* white-space: nowrap; */
-  height: 3.5rem;
+  height: 4.5rem;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  background-color: #f7f7f9;
+  border-radius: 9px;
+  margin: 0.3rem 0.1rem;
+  line-height: 1.5;
+  padding: 0 0.3rem;
 }
 
 .listing-title-font {
@@ -62,15 +69,28 @@
 }
 
 .listing-location-font {
-  background-color: #f1f6f9;
-  margin: 0;
-  font-style: italic;
+  /* background-color: #f1f6f9; */
+  background-color: #2bb792;
+  /* backgroundColor: "#2bb792", */
+  /* margin: 0.7rem 0 0 0; */
+  /* font-style: italic; */
   display: inline;
+  /* border: 1px solid black; */
+  padding: 0.1rem 0.9rem;
+  border-radius: 6px;
+  color: white;
+  /* min-width: 20rem !important; */
+  max-width: 15ch;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .listing-briefdescription-font {
-  color: navy;
+  /* color: navy; */
   margin: 0.5rem 0;
+  color: #595959;
+  font-weight: 700;
 }
 
 .listings-grid-buttonbase {
@@ -87,7 +107,6 @@
 
 .listing-chip-applied {
   font-size: 5px;
-  
 }
 
 .listings-items-box {

@@ -7,7 +7,7 @@ import { jobListingSelected, jobListings } from "../features/jobListingsSlice";
 import axios from "axios";
 import { Box, ButtonBase, Card, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import SearchBar from "./SearchBar";
+import SearchBar from "../components/SearchBar";
 import Chip from "@mui/material/Chip";
 import { db, storage } from "../firebase/config";
 import {
@@ -196,13 +196,17 @@ function Listings() {
                 value="Doctorate"
               >
                 <div className="listings-grid-item-div">
-                  <div item xs={11} className="listing-title">
-                    <p className="listing-title-font"> {listing.title}</p>
-                  </div>
+                  <Grid container>
+                    <Grid item xs={8} className="listing-title">
+                      <p className="listing-title-font"> {listing.title}</p>
+                    </Grid>
 
-                  <div className="listing-location">
-                    <p className="listing-location-font">{listing.location} </p>
-                  </div>
+                    <Grid item xs={4} className="listing-location">
+                      <p className="listing-location-font">
+                        {listing.location}
+                      </p>
+                    </Grid>
+                  </Grid>
 
                   <div className="listing-briefdescription">
                     <p className="listing-briefdescription-font">
@@ -228,7 +232,7 @@ function Listings() {
                     }}
                   />
                 )}
-                <Box item xs={1} className="listing-favorite">
+                {email.length > 0 && <Box item xs={1} className="listing-favorite">
                   {favoritesArray.includes(listing.jobId) ? (
                     <IconButton
                       // sx={{ "& :hover": { color: "gold" } }}
@@ -247,7 +251,8 @@ function Listings() {
                       <FavoriteBorderIcon className="listing-favorite-icon" />
                     </IconButton>
                   )}
-                </Box>
+                </Box>}
+                
               </Box>
             </Box>
           </Grid>

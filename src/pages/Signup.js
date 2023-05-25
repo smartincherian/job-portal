@@ -197,8 +197,19 @@ function Signup() {
                 variant="contained"
                 color="primary"
                 onClick={signupButtonHandler}
+                style={{
+                  textTransform: "none",
+                  width: "12.5rem",
+                  borderColor: "#2bb792",
+                  borderWidth: "2px",
+                  backgroundColor: "#2bb792",
+                  color: "white",
+                  marginBottom: "2rem",
+                  fontFamily: "Segoe UI",
+                  fontWeight: 600,
+                }}
               >
-                Signup
+                Sign up
               </Button>
             </Grid>
           </Grid>

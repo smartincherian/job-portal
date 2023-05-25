@@ -2,7 +2,7 @@
   width: 10rem;
   height: 2rem;
   border: 2px solid #ccc;
-  border-radius: 20px;
+  border-radius: 9px;
   padding: 5px 10px;
   font-size: 16px;
   outline: none;
@@ -18,7 +18,7 @@
   margin-top: 2rem;
   width: 25rem;
   /* height: 40px; */
-  border-radius: 40px;
+  border-radius: 9px;
   /* box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); */
   /* transform: translate(-50%, -50%); */
   /* background: #fff; */

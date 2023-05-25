@@ -1,0 +1,26 @@
+.job-application-form-heading {
+  text-align: center !important;
+  color: #03c988;
+  margin: 0;
+}
+
+.job-application-form-resume-div {
+  margin-top: 0.5rem;
+}
+
+.job-application-form-button-div {
+  text-align: right;
+}
+
+@media only screen and (max-width: 949px) {
+  .job-application-form-button-div {
+    /* text-align: center; */
+  }
+}
+
+.listing-selected-error {
+  color: #b04759;
+  margin: 0;
+  font-size: small;
+  text-align: center;
+}

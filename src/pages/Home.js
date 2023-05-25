@@ -14,7 +14,7 @@ import users from "../assets/images/users.jpg";
 import jobs from "../assets/images/jobs.jpg";
 import { NavBar } from "../components/NavBar";
 import { Link } from "react-router-dom";
-import Login from "./Login";
+import Login from "../components/Login";
 import { makeStyles } from "@mui/material/styles";
 
 export function HomePage(props) {
@@ -55,11 +55,15 @@ export function HomePage(props) {
                       width: "12.5rem",
                       borderColor: "#2bb792",
                       borderWidth: "2px",
+                      fontFamily: "Segoe UI",
+                      fontWeight: 600,
                     }}
                     sx={{
                       "&:hover": {
                         bgcolor: "#2bb792",
                         color: "white",
+                        fontFamily: "Segoe UI",
+                        fontWeight: 600,
                       },
                     }}
                   >
@@ -78,11 +82,15 @@ export function HomePage(props) {
                       width: "12.5rem",
                       borderColor: "#2bb792",
                       borderWidth: "2px",
+                      fontFamily: "Segoe UI",
+                      fontWeight: 600,
                     }}
                     sx={{
                       "&:hover": {
                         bgcolor: "#2bb792",
                         color: "white",
+                        fontFamily: "Segoe UI",
+                        fontWeight: 600,
                       },
                     }}
                   >

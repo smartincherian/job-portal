@@ -7,7 +7,7 @@
   border: 1px solid #ccc;
   background: #fff;
   transition: box-shadow 0.3s;
-  border-radius: 5px;
+  border-radius: 9px;
   text-align: left;
   padding: 1rem;
 }
@@ -83,4 +83,12 @@
 .listing-click-toapply :hover {
   color: navy;
   cursor: pointer;
+}
+
+.scroll-div-down {
+  min-height: 50px;
+}
+
+.dashboard-icon {
+  text-align: center;
 }
