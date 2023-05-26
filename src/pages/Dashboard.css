@@ -25,7 +25,7 @@
   margin: 0;
   float: right;
   cursor: pointer;
-  color: #9ba4b5;
+  color: #595959;
 }
 
 .dashboard-container-2 {
@@ -67,8 +67,9 @@
 }
 
 .dashboard-heading {
-  color: #1cd6ce;
   margin: 0;
+  text-align: center !important;
+  color: #2bb792;
 }
 
 .dashboard-work-word {
@@ -77,7 +78,7 @@
 }
 
 .listing-click-toapply {
-  color: #1cd6ce;
+  color: #2bb792;
 }
 
 .listing-click-toapply :hover {

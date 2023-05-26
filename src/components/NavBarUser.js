@@ -63,7 +63,7 @@ export function NavBarUser(props) {
 
   const logoHandler = () => {
     navigate("/");
-  }
+  };
 
   const getLoggedInUser = () => {
     onAuthStateChanged(auth, (user) => {
@@ -99,7 +99,7 @@ export function NavBarUser(props) {
               <Grid
                 item
                 xs={12}
-                md={1}
+                sm={1}
                 className="navbar-user-backbutton navbar-topleftcorner"
                 // sx={{ display: { xs: "none", md: "inline-block" } }}
               >
@@ -112,7 +112,7 @@ export function NavBarUser(props) {
                   <ArrowBackIosIcon />
                 </Button>
               </Grid>
-              <Grid item xs={12} md={1}>
+              <Grid item xs={12} sm={1}>
                 <div className="navbar-user-logo">
                   <img
                     src={logo}
@@ -123,7 +123,7 @@ export function NavBarUser(props) {
                   ></img>
                 </div>
               </Grid>
-              <Grid item xs={12} md={9}>
+              <Grid item xs={12} sm={9}>
                 <Typography
                   variant="subtitle1"
                   component="div"
@@ -131,13 +131,13 @@ export function NavBarUser(props) {
                   className="navbaruser-sentence"
                 >
                   Welcome to 7th Pillar Jobs{" "}
-                  <Box sx={{ display: { xs: "none", md: "inline-block" } }}>
+                  <Box sx={{ display: { xs: "none", sm: "inline-block" } }}>
                     : Connecting talent with opportunity.
                   </Box>
                 </Typography>
               </Grid>
 
-              <Grid item xs={2} md={1} className="navbar-topcorner">
+              <Grid item xs={2} sm={1} className="navbar-topcorner">
                 {userLoggedIn && (
                   <div>
                     <IconButton

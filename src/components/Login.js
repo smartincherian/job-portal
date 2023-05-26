@@ -126,9 +126,10 @@ function Login() {
                   ["emailIsBlank"]: false,
                 }));
               }}
-              label="Email"
+              label="Email*"
               variant="outlined"
               size="small"
+              inputProps={{ style: { fontSize: 13 } }}
               InputLabelProps={{ style: { fontSize: 13 } }}
               style={{
                 width: "12.5rem",
@@ -147,7 +148,7 @@ function Login() {
           </Grid>
           <Grid item>
             <TextField
-              label="Password"
+              label="Password*"
               onChange={(event) => {
                 setPassword(event.target.value);
                 setLoginFormError((prevState) => ({
@@ -160,6 +161,7 @@ function Login() {
               type="password"
               size="small"
               InputLabelProps={{ style: { fontSize: 13 } }}
+              inputProps={{ style: { fontSize: 13 } }}
               style={{
                 width: "12.5rem",
               }}

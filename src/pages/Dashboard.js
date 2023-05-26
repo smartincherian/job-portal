@@ -223,10 +223,10 @@ function Dashboard() {
         <Grid item md={11} xs={11} className="dashboard-grid-item">
           <Grid container>
             <Grid item md={9} xs={11}>
-              <h3>
+              {/* <h3>
                 <span className="dashboard-selected-field">Email: </span>
                 {email}
-              </h3>
+              </h3> */}
             </Grid>
             <Grid item md={3} xs={11} className="dashboard-icon">
               {showJobsApplied ? (
@@ -257,7 +257,7 @@ function Dashboard() {
 
           {showJobsApplied && (
             <Grid container justifyContent="center" alignItems="center">
-              <h2 className="dashboard-heading">Jobs applied</h2>
+              <h3 className="dashboard-heading">Jobs applied</h3>
               <Grid item xs={12} className="dashboard-grid-item-2">
                 <DataGrid
                   HorizontalScrollBarVisibility="Hidden"
@@ -296,7 +296,7 @@ function Dashboard() {
 
           {showFavorites && (
             <Grid container justifyContent="center" alignItems="center">
-              <h2 className="dashboard-heading">Favorite Jobs</h2>
+              <h3 className="dashboard-heading">Favorite Jobs</h3>
               <Grid item xs={12} className="dashboard-grid-item-2">
                 <DataGrid
                   HorizontalScrollBarVisibility="Hidden"

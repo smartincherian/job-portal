@@ -568,6 +568,8 @@ function JobApplicationForm(props) {
 
         <Grid item xs={12} md={6}>
           <TextField
+            InputLabelProps={{ style: { fontSize: 14 } }}
+            inputProps={{ style: { fontSize: 14 } }}
             variant="outlined"
             label="Full Name*"
             onChange={(event) => {
@@ -593,7 +595,15 @@ function JobApplicationForm(props) {
         <Grid item xs={12} md={6}>
           <TextField
             variant="outlined"
-            sx={{ marginTop: 3 }}
+            inputProps={{ style: { fontSize: 14 } }}
+            InputLabelProps={{ style: { fontSize: 14 } }}
+            sx={{
+              marginTop: 3,
+              "& .css-k4qjio-MuiFormHelperText-root": {
+                marginTop: "0",
+                fontSize: 10,
+              },
+            }}
             label="Age*"
             size="small"
             inputProps={{ type: "number", maxLength: 14 }}
@@ -627,6 +637,8 @@ function JobApplicationForm(props) {
 
         <Grid item xs={12} md={6}>
           <TextField
+            InputLabelProps={{ style: { fontSize: 14 } }}
+            inputProps={{ style: { fontSize: 14 } }}
             variant="outlined"
             label="Qualification*"
             sx={{ marginTop: 3 }}
@@ -652,9 +664,17 @@ function JobApplicationForm(props) {
 
         <Grid item xs={12} md={6}>
           <TextField
+            InputLabelProps={{ style: { fontSize: 14 } }}
+            inputProps={{ style: { fontSize: 14 } }}
             variant="outlined"
             label="Experience*"
-            sx={{ marginTop: 3 }}
+            sx={{
+              marginTop: 3,
+              "& .css-k4qjio-MuiFormHelperText-root": {
+                marginTop: "0",
+                fontSize: 10,
+              },
+            }}
             size="small"
             value={jobApplicantData.experience}
             type="number"

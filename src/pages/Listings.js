@@ -38,6 +38,7 @@ function Listings() {
   // console.log(listingsNew);
 
   const { searchResult } = useSelector((state) => state.search);
+  const { searchWord } = useSelector((state) => state.searchWord);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -62,7 +63,7 @@ function Listings() {
   }, [email]);
 
   useEffect(() => {
-    if (searchResult.length > 0) {
+    if (searchWord.length > 0) {
       setListingsWithSearch(searchResult);
     } else {
       setListingsWithSearch(listings);
@@ -180,6 +181,9 @@ function Listings() {
         direction="row"
         style={{ height: "100%" }}
       >
+        {searchWord.length > 0 && searchResult.length == 0 && (
+          <p className="listings-nomatches">No matches found..</p>
+        )}
         {listingsWithSearch.map((listing) => (
           <Grid
             item
@@ -224,35 +228,36 @@ function Listings() {
                     size="small"
                     sx={{
                       fontSize: "0.8125rem",
-                      backgroundColor: "#78cfcf",
+                      backgroundColor: "#86f0d3",
                       fontFamily: "Segoe UI",
                       fontWeight: 700,
-                      color: "#14332c",
+                      color: "#0e8766;",
                       marginTop: "0.75rem",
                     }}
                   />
                 )}
-                {email.length > 0 && <Box item xs={1} className="listing-favorite">
-                  {favoritesArray.includes(listing.jobId) ? (
-                    <IconButton
-                      // sx={{ "& :hover": { color: "gold" } }}
-                      sx={{ color: "#F45050" }}
-                      onClick={favoriteButtonHandler}
-                      value={listing.jobId}
-                    >
-                      <FavoriteIcon className="listing-favorite-icon" />
-                    </IconButton>
-                  ) : (
-                    <IconButton
-                      // sx={{ "& :hover": { color: "gold" } }}
-                      onClick={favoriteButtonHandler}
-                      value={listing.jobId}
-                    >
-                      <FavoriteBorderIcon className="listing-favorite-icon" />
-                    </IconButton>
-                  )}
-                </Box>}
-                
+                {email.length > 0 && (
+                  <Box item xs={1} className="listing-favorite">
+                    {favoritesArray.includes(listing.jobId) ? (
+                      <IconButton
+                        // sx={{ "& :hover": { color: "gold" } }}
+                        sx={{ color: "#F45050" }}
+                        onClick={favoriteButtonHandler}
+                        value={listing.jobId}
+                      >
+                        <FavoriteIcon className="listing-favorite-icon" />
+                      </IconButton>
+                    ) : (
+                      <IconButton
+                        // sx={{ "& :hover": { color: "gold" } }}
+                        onClick={favoriteButtonHandler}
+                        value={listing.jobId}
+                      >
+                        <FavoriteBorderIcon className="listing-favorite-icon" />
+                      </IconButton>
+                    )}
+                  </Box>
+                )}
               </Box>
             </Box>
           </Grid>

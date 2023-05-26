@@ -15,18 +15,18 @@
 }
 
 .jobseeker-login-font {
-  color: #31445a;
+  color: #4d3951;
   font-weight: bold !important;
   line-height: 32px !important;
   margin-bottom: 10px !important;
-  font-family: "Fira Sans", sans-serif !important;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 20px;
 }
 
 .third-container-sentence {
   font-weight: bold;
   margin-top: 4rem;
-  color: #4d3956;
+  color: #4d3951;
 }
 
 .company-logos {
@@ -62,7 +62,7 @@
   margin-left: 5px;
   margin-bottom: 100px;
   margin-top: 10px;
-  color: #31445a;
+  color: #4d3951;
 }
 
 .users-jobs-span {

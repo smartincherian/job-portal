@@ -79,12 +79,7 @@
   margin: 1% 3%;
   float: right;
   cursor: pointer;
-  color: #9ba4b5;
-}
-
-.listing-grid-item-heading {
-  text-align: center !important;
-  color: #03c988;
+  color: #595959;
 }
 
 .job-selected-inside-div {

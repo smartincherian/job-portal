@@ -33,10 +33,12 @@
 .listing-title {
   font-weight: bold;
   font-size: large;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .listing-location {
-  /* background-color: #f1f6f9; */
   font-weight: 600;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: small;
@@ -66,6 +68,9 @@
   margin: 0;
   text-align: left;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .listing-location-font {
@@ -130,4 +135,10 @@
 
 .listing-favorite-icon :hover {
   background-color: gold !important;
+}
+
+.listings-nomatches{
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  font-weight: 700;
 }

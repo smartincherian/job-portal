@@ -3,6 +3,7 @@ import "./SearchBar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { jobListings } from "../features/jobListingsSlice";
 import { jobSearch } from "../features/searchSlice";
+import { jobSearchWord } from "../features/searchWordSlice";
 
 function SearchBar() {
   const [searchResult, setSearchResult] = useState([]);
@@ -10,9 +11,8 @@ function SearchBar() {
   const { listings } = useSelector((state) => state.listings);
 
   const searchInputChangeHandler = (e) => {
-    console.log(listings);
-
     const searchWord = e.target.value.toLowerCase();
+    dispatch(jobSearchWord(searchWord));
 
     let searchResult = listings.filter((obj) => {
       const lowercasedValues = Object.values(obj).map((value) =>

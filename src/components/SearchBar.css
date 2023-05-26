@@ -4,7 +4,7 @@
   border: 2px solid #ccc;
   border-radius: 9px;
   padding: 5px 10px;
-  font-size: 16px;
+  font-size: 14px;
   outline: none;
   margin: auto;
   margin-top: 2rem;
@@ -24,7 +24,7 @@
   /* background: #fff; */
   /* transition: all 0.3s ease; */
   padding: 0.5rem;
-  font-size: medium;
+  font-size: 13px;
 }
 
 @media only screen and (max-width: 949px) {

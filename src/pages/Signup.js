@@ -125,7 +125,8 @@ function Signup() {
 
             <Grid item xs={6} sm={3}>
               <TextField
-                label="Email"
+                label="Email*"
+                inputProps={{ style: { fontSize: 13 } }}
                 variant="outlined"
                 value={email}
                 onChange={(event) => {
@@ -151,7 +152,8 @@ function Signup() {
 
             <Grid item xs={12}>
               <TextField
-                label="Password"
+                label="Password*"
+                inputProps={{ style: { fontSize: 13 } }}
                 variant="outlined"
                 type="password"
                 value={password}
@@ -178,7 +180,8 @@ function Signup() {
 
             <Grid item xs={12}>
               <TextField
-                label="Confirm Password"
+                label="Confirm Password*"
+                inputProps={{ style: { fontSize: 13 } }}
                 variant="outlined"
                 type="password"
                 value={confirmPassword}
